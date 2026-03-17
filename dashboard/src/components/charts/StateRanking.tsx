@@ -54,12 +54,15 @@ export default function StateRanking() {
 
   return (
     <div data-testid="state-ranking" className="mt-4">
+      <p className="text-xs text-muted italic mb-2 md:hidden">
+        Deslize para ver todas as colunas →
+      </p>
       <div className="overflow-x-auto">
-        <table className="w-full text-xs font-sans border-collapse">
+        <table className="w-full text-xs font-sans border-collapse min-w-[480px]">
           <thead>
             <tr className="border-b border-border">
-              <th className={thClass(null, "left")}>#</th>
-              <th className={thClass(null, "left")}>UF</th>
+              <th className={`${thClass(null, "left")} sticky left-0 z-10 bg-white`}>#</th>
+              <th className={`${thClass(null, "left")} sticky left-8 z-10 bg-white`}>UF</th>
               <th className={thClass("pedidos")} onClick={() => handleSort("pedidos")}>
                 Pedidos{sortIndicator("pedidos")}
               </th>
@@ -78,8 +81,8 @@ export default function StateRanking() {
           <tbody>
             {sorted.map((row, i) => (
               <tr key={row.estado} className="border-b border-border hover:bg-surface">
-                <td className="py-2 px-3 text-muted tabular-nums">{i + 1}</td>
-                <td className="py-2 px-3 font-medium text-foreground">{row.estado}</td>
+                <td className="py-2 px-3 text-muted tabular-nums sticky left-0 z-10 bg-white">{i + 1}</td>
+                <td className="py-2 px-3 font-medium text-foreground sticky left-8 z-10 bg-white">{row.estado}</td>
                 <td className="py-2 px-3 text-right tabular-nums">{formatNumber(row.pedidos)}</td>
                 <td className="py-2 px-3 text-right tabular-nums">{formatBRLCompact(row.receita)}</td>
                 <td className="py-2 px-3 text-right tabular-nums">{formatBRL(row.frete_medio)}</td>

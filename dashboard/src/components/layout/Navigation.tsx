@@ -27,10 +27,10 @@ const Navigation = ({ onNavigate }: NavigationProps) => {
                 href={href}
                 onClick={onNavigate}
                 className={[
-                  "block px-3 py-2 text-sm font-sans font-medium transition-colors",
+                  "block px-3 py-2 text-sm font-sans font-medium transition-colors min-h-[44px] md:min-h-0 flex items-center",
                   "hover:text-accent",
                   isActive
-                    ? "text-accent border-b-2 border-accent"
+                    ? "text-accent md:border-b-2 md:border-accent border-l-2 md:border-l-0 border-accent"
                     : "text-muted",
                 ].join(" ")}
                 aria-current={isActive ? "page" : undefined}

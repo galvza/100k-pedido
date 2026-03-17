@@ -68,7 +68,7 @@ export default function BrazilMap({ data, metric }: BrazilMapProps) {
     return (
       <div
         data-testid="brazil-map-geojson-loading"
-        className="h-[420px] bg-secondary animate-pulse rounded"
+        className="h-[300px] sm:h-[420px] bg-secondary animate-pulse rounded"
       />
     );
   }
@@ -80,7 +80,7 @@ export default function BrazilMap({ data, metric }: BrazilMapProps) {
       <MapContainer
         center={[-14.0, -51.0]}
         zoom={4}
-        style={{ height: "420px", width: "100%" }}
+        className="h-[300px] sm:h-[420px] w-full"
         scrollWheelZoom={false}
         data-testid="brazil-map"
       >

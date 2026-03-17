@@ -15,6 +15,7 @@ import { loadChapterData } from "@/lib/data";
 import type { ReviewsDistribuicao } from "@/types";
 import { formatNumber, formatPercent } from "@/lib/formatters";
 import { CHART_CONFIG, MUTED_COLOR } from "@/lib/constants";
+import { useIsMobile } from "@/lib/hooks";
 
 /** Cores semânticas por score (1=vermelho → 5=verde). */
 const SCORE_COLORS: Record<number, string> = {
@@ -48,6 +49,7 @@ function CustomTooltip({ active, payload }: TooltipProps) {
  */
 export default function ScoreDistribution() {
   const [data, setData] = useState<ReviewsDistribuicao[] | null>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     loadChapterData<ReviewsDistribuicao[]>(
@@ -72,7 +74,7 @@ export default function ScoreDistribution() {
         <BarChart
           data={sorted}
           layout="vertical"
-          margin={{ ...CHART_CONFIG.margin, left: 32, right: 56 }}
+          margin={{ ...CHART_CONFIG.margin, left: 32, right: isMobile ? 36 : 56 }}
         >
           <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" horizontal={false} />
           <XAxis

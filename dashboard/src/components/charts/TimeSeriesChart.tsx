@@ -16,6 +16,7 @@ import { loadChapterData } from "@/lib/data";
 import type { SazonalidadeMensal } from "@/types";
 import { formatBRLCompact, formatNumber } from "@/lib/formatters";
 import { CHART_CONFIG, CHART_COLORS, MUTED_COLOR } from "@/lib/constants";
+import { useIsMobile } from "@/lib/hooks";
 import { format, parseISO } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
@@ -55,6 +56,7 @@ function CustomTooltip({ active, payload, label }: TooltipProps) {
  */
 export default function TimeSeriesChart() {
   const [data, setData] = useState<SazonalidadeMensal[] | null>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     loadChapterData<SazonalidadeMensal[]>("05_sazonalidade_mensal.json").then(
@@ -77,19 +79,19 @@ export default function TimeSeriesChart() {
 
   return (
     <div data-testid="time-series-chart" className="mt-4">
-      <ResponsiveContainer width="100%" height={288}>
-        <LineChart data={data} margin={CHART_CONFIG.marginWithAxis}>
+      <ResponsiveContainer width="100%" height={isMobile ? 240 : 288}>
+        <LineChart data={data} margin={{ ...CHART_CONFIG.marginWithAxis, left: isMobile ? 40 : 56 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
           <XAxis
             dataKey="mes"
             tickFormatter={tickMonth}
-            tick={{ fontSize: CHART_CONFIG.fontSizeAxis, fill: MUTED_COLOR }}
-            interval={2}
+            tick={{ fontSize: isMobile ? 9 : CHART_CONFIG.fontSizeAxis, fill: MUTED_COLOR }}
+            interval={isMobile ? 4 : 2}
           />
           <YAxis
             tickFormatter={(v: number) => formatBRLCompact(v)}
-            tick={{ fontSize: CHART_CONFIG.fontSizeAxis, fill: MUTED_COLOR }}
-            width={64}
+            tick={{ fontSize: isMobile ? 9 : CHART_CONFIG.fontSizeAxis, fill: MUTED_COLOR }}
+            width={isMobile ? 48 : 64}
           />
           <Tooltip content={<CustomTooltip />} />
           <ReferenceLine
@@ -97,10 +99,10 @@ export default function TimeSeriesChart() {
             stroke="#ef4444"
             strokeDasharray="4 4"
             label={{
-              value: "Black Friday '17",
+              value: isMobile ? "BF '17" : "Black Friday '17",
               position: "top",
               fill: "#ef4444",
-              fontSize: 12,
+              fontSize: isMobile ? 9 : 12,
             }}
           />
           <Legend

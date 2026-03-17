@@ -16,6 +16,7 @@ import { loadChapterData } from "@/lib/data";
 import type { FunilConversao } from "@/types";
 import { formatNumber, formatPercent } from "@/lib/formatters";
 import { CHART_COLORS, CHART_CONFIG, MUTED_COLOR } from "@/lib/constants";
+import { useIsMobile } from "@/lib/hooks";
 
 interface TooltipPayload {
   active?: boolean;
@@ -49,6 +50,7 @@ export default function FunnelBar() {
   const [data, setData] = useState<Array<FunilConversao & { pct_base: number }> | null>(
     null
   );
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     loadChapterData<FunilConversao[]>("01_funil_conversao.json").then((raw) => {
@@ -77,14 +79,14 @@ export default function FunnelBar() {
           <BarChart
             data={data}
             layout="vertical"
-            margin={{ top: 4, right: 80, bottom: 4, left: 72 }}
+            margin={{ top: 4, right: isMobile ? 44 : 80, bottom: 4, left: isMobile ? 4 : 72 }}
           >
             <CartesianGrid horizontal={false} stroke="#E5E7EB" strokeDasharray="3 3" />
             <YAxis
               dataKey="etapa"
               type="category"
-              tick={{ fontSize: CHART_CONFIG.fontSizeAxis, fill: MUTED_COLOR }}
-              width={68}
+              tick={{ fontSize: isMobile ? 10 : CHART_CONFIG.fontSizeAxis, fill: MUTED_COLOR }}
+              width={isMobile ? 56 : 68}
               tickLine={false}
               axisLine={false}
             />

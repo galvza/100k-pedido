@@ -15,6 +15,7 @@ import {
   LabelList,
 } from "recharts";
 import { CHART_CONFIG, CHART_COLORS, MUTED_COLOR } from "@/lib/constants";
+import { useIsMobile } from "@/lib/hooks";
 
 interface ScatterPoint {
   x: number;
@@ -34,6 +35,7 @@ interface TooltipPayloadItem {
 export default function CorrelationChart() {
   const [points, setPoints] = useState<ScatterPoint[] | null>(null);
   const [correlacao, setCorrelacao] = useState<GeoCorrelacao | null>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     Promise.all([
@@ -71,8 +73,8 @@ export default function CorrelationChart() {
 
   return (
     <div data-testid="correlation-chart" className="mt-4">
-      <ResponsiveContainer width="100%" height={280}>
-        <ScatterChart margin={CHART_CONFIG.marginWithAxis}>
+      <ResponsiveContainer width="100%" height={isMobile ? 240 : 280}>
+        <ScatterChart margin={{ ...CHART_CONFIG.marginWithAxis, left: isMobile ? 40 : 56 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
           <XAxis
             dataKey="x"
@@ -81,10 +83,10 @@ export default function CorrelationChart() {
             tick={{ fontSize: CHART_CONFIG.fontSizeAxis, fill: MUTED_COLOR }}
           >
             <Label
-              value="Frete (% do valor do pedido)"
+              value={isMobile ? "Frete (%)" : "Frete (% do valor do pedido)"}
               offset={-10}
               position="insideBottom"
-              style={{ fontSize: 11, fill: MUTED_COLOR }}
+              style={{ fontSize: isMobile ? 9 : 11, fill: MUTED_COLOR }}
             />
           </XAxis>
           <YAxis

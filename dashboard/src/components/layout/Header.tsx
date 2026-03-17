@@ -31,7 +31,7 @@ const Header = () => {
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden p-2 text-muted hover:text-foreground transition-colors"
+            className="md:hidden p-2 min-h-[44px] min-w-[44px] flex items-center justify-center text-muted hover:text-foreground transition-colors"
             onClick={() => setMenuOpen((v) => !v)}
             aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
             aria-expanded={menuOpen}

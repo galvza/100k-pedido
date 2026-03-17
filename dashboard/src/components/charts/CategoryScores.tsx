@@ -16,6 +16,7 @@ import { loadChapterData } from "@/lib/data";
 import type { ReviewsCategorias } from "@/types";
 import { formatNumber } from "@/lib/formatters";
 import { CHART_CONFIG, MUTED_COLOR } from "@/lib/constants";
+import { useIsMobile } from "@/lib/hooks";
 
 /** Score baixo (< 3.5) → vermelho, médio → âmbar, alto (>= 4.0) → verde. */
 function getScoreColor(score: number): string {
@@ -53,6 +54,7 @@ function CustomTooltip({ active, payload }: TooltipProps) {
  */
 export default function CategoryScores() {
   const [data, setData] = useState<ReviewsCategorias[] | null>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     loadChapterData<ReviewsCategorias[]>(
@@ -79,21 +81,21 @@ export default function CategoryScores() {
         <BarChart
           data={sorted}
           layout="vertical"
-          margin={{ top: 8, right: 48, bottom: 8, left: 160 }}
+          margin={{ top: 8, right: isMobile ? 32 : 48, bottom: 8, left: isMobile ? 8 : 160 }}
         >
           <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" horizontal={false} />
           <XAxis
             type="number"
             domain={[1, 5]}
-            tickCount={5}
+            tickCount={isMobile ? 3 : 5}
             tick={{ fontSize: CHART_CONFIG.fontSizeAxis, fill: MUTED_COLOR }}
           />
           <YAxis
             type="category"
             dataKey="categoria"
             tickFormatter={formatCategoria}
-            tick={{ fontSize: 10, fill: MUTED_COLOR }}
-            width={152}
+            tick={{ fontSize: isMobile ? 9 : 10, fill: MUTED_COLOR }}
+            width={isMobile ? 88 : 152}
           />
           <Tooltip content={<CustomTooltip />} />
           <ReferenceLine x={4.0} stroke="#374151" strokeDasharray="4 2" strokeWidth={1} />

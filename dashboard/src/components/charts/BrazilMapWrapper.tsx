@@ -15,7 +15,7 @@ const METRIC_LABELS: Record<MapMetric, string> = {
 const BrazilMapDynamic = dynamic(() => import("./BrazilMap"), {
   ssr: false,
   loading: () => (
-    <div className="h-[420px] bg-secondary animate-pulse rounded" />
+    <div className="h-[300px] sm:h-[420px] bg-secondary animate-pulse rounded" />
   ),
 });
 
@@ -35,7 +35,7 @@ export default function BrazilMapWrapper() {
     return (
       <div
         data-testid="brazil-map-wrapper-loading"
-        className="mt-4 h-[420px] bg-secondary animate-pulse rounded"
+        className="mt-4 h-[300px] sm:h-[420px] bg-secondary animate-pulse rounded"
       />
     );
   }
@@ -47,7 +47,7 @@ export default function BrazilMapWrapper() {
           <button
             key={m}
             onClick={() => setMetric(m)}
-            className={`text-xs px-3 py-1.5 rounded border font-sans transition-colors ${
+            className={`text-xs px-3 py-2.5 sm:py-1.5 min-h-[44px] sm:min-h-0 rounded border font-sans transition-colors ${
               metric === m
                 ? "bg-primary text-white border-primary"
                 : "bg-white text-muted border-border hover:border-primary"
