@@ -55,7 +55,7 @@ export default function NpsGauge() {
         <p className="font-sans text-xs text-muted uppercase tracking-wide mb-1">NPS</p>
         <p
           data-testid="nps-value"
-          className={`font-serif text-4xl font-bold ${color}`}
+          className={`font-serif text-3xl sm:text-4xl font-bold ${color}`}
         >
           {nps}
         </p>
@@ -67,25 +67,25 @@ export default function NpsGauge() {
       {/* Breakdown */}
       <div className="flex-1 w-full grid grid-cols-3 gap-2 sm:gap-3">
         <div className="bg-white border border-border rounded p-2 sm:p-3 text-center">
-          <p className="font-sans text-[10px] sm:text-xs text-muted uppercase tracking-wide mb-1">Promotores</p>
+          <p className="font-sans text-xs text-muted uppercase tracking-wide mb-1">Promotores</p>
           <p className="font-serif text-lg sm:text-xl font-bold text-emerald-600">
             {formatPercent(promotores)}
           </p>
-          <p className="font-sans text-[10px] sm:text-xs text-muted">score 5★</p>
+          <p className="font-sans text-xs text-muted">score 5★</p>
         </div>
         <div className="bg-white border border-border rounded p-2 sm:p-3 text-center">
-          <p className="font-sans text-[10px] sm:text-xs text-muted uppercase tracking-wide mb-1">Neutros</p>
+          <p className="font-sans text-xs text-muted uppercase tracking-wide mb-1">Neutros</p>
           <p className="font-serif text-lg sm:text-xl font-bold text-amber-600">
             {formatPercent(neutros)}
           </p>
-          <p className="font-sans text-[10px] sm:text-xs text-muted">score 3–4★</p>
+          <p className="font-sans text-xs text-muted">score 3–4★</p>
         </div>
         <div className="bg-white border border-border rounded p-2 sm:p-3 text-center">
-          <p className="font-sans text-[10px] sm:text-xs text-muted uppercase tracking-wide mb-1">Detratores</p>
+          <p className="font-sans text-xs text-muted uppercase tracking-wide mb-1">Detratores</p>
           <p className="font-serif text-lg sm:text-xl font-bold text-red-600">
             {formatPercent(detratores)}
           </p>
-          <p className="font-sans text-[10px] sm:text-xs text-muted">score 1–2★</p>
+          <p className="font-sans text-xs text-muted">score 1–2★</p>
         </div>
       </div>
     </div>

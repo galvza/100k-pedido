@@ -10,7 +10,7 @@ interface InsightProps {
  */
 const Insight = ({ children, icon = "→" }: InsightProps) => (
   <aside className="my-6 border-l-4 border-accent pl-4 py-2">
-    <p className="font-sans text-sm leading-relaxed text-foreground">
+    <p className="font-sans text-base leading-relaxed text-foreground">
       <span className="mr-2 text-accent" aria-hidden="true">
         {icon}
       </span>

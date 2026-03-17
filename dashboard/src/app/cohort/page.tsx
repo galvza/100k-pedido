@@ -18,10 +18,10 @@ export default function CohortPage() {
     >
       {/* Seção 1 — O que é */}
       <section>
-        <h2 className="font-serif text-xl font-bold text-primary mb-2">
+        <h2 className="font-serif text-xl sm:text-2xl font-bold text-primary mb-2">
           O que é análise de cohort?
         </h2>
-        <p className="font-sans text-sm text-muted leading-relaxed">
+        <p className="font-sans text-base text-muted leading-relaxed">
           Agrupamos clientes pelo mês da primeira compra (coorte) e medimos
           quantos voltam nos meses seguintes. M+0 é sempre 100% — a pergunta é
           quanto dessa base permanece ativa.
@@ -30,10 +30,10 @@ export default function CohortPage() {
 
       {/* Seção 2 — Heatmap */}
       <section>
-        <h2 className="font-serif text-xl font-bold text-primary mb-2">
+        <h2 className="font-serif text-xl sm:text-2xl font-bold text-primary mb-2">
           Heatmap de retenção por coorte
         </h2>
-        <p className="font-sans text-sm text-muted leading-relaxed mb-1">
+        <p className="font-sans text-base text-muted leading-relaxed mb-1">
           Verde escuro indica alta retenção; branco indica ausência de retorno.
           Células cinzas são períodos futuros (além do horizonte do dataset).
           O padrão triangular é esperado: coortes mais recentes têm menos meses
@@ -56,10 +56,10 @@ export default function CohortPage() {
 
       {/* Seção 3 — Resumo */}
       <section>
-        <h2 className="font-serif text-xl font-bold text-primary mb-2">
+        <h2 className="font-serif text-xl sm:text-2xl font-bold text-primary mb-2">
           Métricas gerais de recompra
         </h2>
-        <p className="font-sans text-sm text-muted leading-relaxed mb-1">
+        <p className="font-sans text-base text-muted leading-relaxed mb-1">
           Consolidando todas as coortes, apenas 7% dos clientes únicos
           realizaram uma segunda compra em qualquer momento do dataset.
           Quem voltou levou em média 183 dias — mais de 6 meses — para fazê-lo.

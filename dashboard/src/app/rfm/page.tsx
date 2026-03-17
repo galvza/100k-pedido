@@ -20,10 +20,10 @@ export default function RfmPage() {
     >
       {/* Seção 1 — O que é RFM? */}
       <section>
-        <h2 className="font-serif text-xl font-bold text-primary mb-2">
+        <h2 className="font-serif text-xl sm:text-2xl font-bold text-primary mb-2">
           O que é RFM?
         </h2>
-        <p className="font-sans text-sm text-muted leading-relaxed mb-1">
+        <p className="font-sans text-base text-muted leading-relaxed mb-1">
           RFM é um modelo clássico de segmentação que classifica clientes por
           comportamento de compra em três dimensões: <strong>Recência</strong>{" "}
           (há quantos dias fez a última compra),{" "}
@@ -55,10 +55,10 @@ export default function RfmPage() {
 
       {/* Seção 2 — Distribuição das métricas */}
       <section>
-        <h2 className="font-serif text-xl font-bold text-primary mb-2">
+        <h2 className="font-serif text-xl sm:text-2xl font-bold text-primary mb-2">
           Distribuição das métricas
         </h2>
-        <p className="font-sans text-sm text-muted leading-relaxed mb-1">
+        <p className="font-sans text-base text-muted leading-relaxed mb-1">
           Os histogramas revelam o perfil real da base. A distribuição de
           frequência é o dado mais revelador: a concentração massiva em
           &ldquo;1 compra&rdquo; não é um bug — é a realidade estrutural de
@@ -79,10 +79,10 @@ export default function RfmPage() {
 
       {/* Seção 3 — Segmentação automática */}
       <section>
-        <h2 className="font-serif text-xl font-bold text-primary mb-2">
+        <h2 className="font-serif text-xl sm:text-2xl font-bold text-primary mb-2">
           Quantos perfis de cliente existem?
         </h2>
-        <p className="font-sans text-sm text-muted leading-relaxed mb-1">
+        <p className="font-sans text-base text-muted leading-relaxed mb-1">
           Pedimos ao algoritmo que encontrasse grupos naturais entre os clientes,
           baseado no comportamento de compra. O gráfico abaixo mostra que a
           partir de 4 grupos, adicionar mais não melhora significativamente a
@@ -91,7 +91,7 @@ export default function RfmPage() {
 
         <ElbowChart />
 
-        <p className="font-sans text-sm text-muted leading-relaxed mt-4 mb-1">
+        <p className="font-sans text-base text-muted leading-relaxed mt-4 mb-1">
           Cada bolha representa um perfil de cliente encontrado pelo algoritmo.
           Quanto mais à esquerda, mais recente a última compra. Quanto mais
           acima, maior o gasto médio. O tamanho indica quantos clientes estão
@@ -112,10 +112,10 @@ export default function RfmPage() {
 
       {/* Seção 4 — Manual vs Automático */}
       <section>
-        <h2 className="font-serif text-xl font-bold text-primary mb-2">
+        <h2 className="font-serif text-xl sm:text-2xl font-bold text-primary mb-2">
           Manual vs Automático — qual usar?
         </h2>
-        <p className="font-sans text-sm text-muted leading-relaxed">
+        <p className="font-sans text-base text-muted leading-relaxed">
           As duas abordagens são complementares. A segmentação manual atribui
           nota 1–5 para cada dimensão (por quartis da distribuição) e soma as
           três notas num score de 3 a 15 — por exemplo, um cliente com R=5,

@@ -19,10 +19,10 @@ export default function GeograficoPage() {
     >
       {/* Seção 1 — Mapa interativo */}
       <section>
-        <h2 className="font-serif text-xl font-bold text-primary mb-2">
+        <h2 className="font-serif text-xl sm:text-2xl font-bold text-primary mb-2">
           Distribuição geográfica dos pedidos
         </h2>
-        <p className="font-sans text-sm text-muted leading-relaxed mb-1">
+        <p className="font-sans text-base text-muted leading-relaxed mb-1">
           O mapa abaixo mostra como o e-commerce se distribui pelo Brasil. A
           concentração no Sudeste é esperada — mas o que acontece com a
           experiência do cliente à medida que o pedido viaja para longe dos
@@ -43,10 +43,10 @@ export default function GeograficoPage() {
 
       {/* Seção 2 — Ranking */}
       <section>
-        <h2 className="font-serif text-xl font-bold text-primary mb-2">
+        <h2 className="font-serif text-xl sm:text-2xl font-bold text-primary mb-2">
           Ranking dos estados
         </h2>
-        <p className="font-sans text-sm text-muted leading-relaxed mb-1">
+        <p className="font-sans text-base text-muted leading-relaxed mb-1">
           Reordene a tabela por qualquer métrica. O gradiente de custo entre
           regiões é visível: estados do Sudeste pagam 11–18% do valor do pedido
           em frete; estados do Norte, 42–60%. O frete como percentual do pedido
@@ -59,10 +59,10 @@ export default function GeograficoPage() {
 
       {/* Seção 3 — Correlação frete × satisfação */}
       <section>
-        <h2 className="font-serif text-xl font-bold text-primary mb-2">
+        <h2 className="font-serif text-xl sm:text-2xl font-bold text-primary mb-2">
           Frete mais caro, avaliação mais baixa?
         </h2>
-        <p className="font-sans text-sm text-muted leading-relaxed mb-1">
+        <p className="font-sans text-base text-muted leading-relaxed mb-1">
           Cada ponto no gráfico representa um estado brasileiro. O eixo
           horizontal mostra o frete como percentual do valor do pedido; o
           vertical, o score médio de avaliação. A tendência descendente é

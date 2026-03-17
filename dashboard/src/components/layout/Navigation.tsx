@@ -27,7 +27,7 @@ const Navigation = ({ onNavigate }: NavigationProps) => {
                 href={href}
                 onClick={onNavigate}
                 className={[
-                  "block px-3 py-2 text-sm font-sans font-medium transition-colors min-h-[44px] md:min-h-0 flex items-center",
+                  "block px-3 py-2 text-base md:text-sm font-sans font-medium transition-colors min-h-[44px] md:min-h-0 flex items-center",
                   "hover:text-accent",
                   isActive
                     ? "text-accent md:border-b-2 md:border-accent border-l-2 md:border-l-0 border-accent"

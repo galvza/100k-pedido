@@ -23,10 +23,10 @@ export default function ReviewsPage() {
     >
       {/* Seção 1 — Distribuição de scores + NPS */}
       <section>
-        <h2 className="font-serif text-xl font-bold text-primary mb-2">
+        <h2 className="font-serif text-xl sm:text-2xl font-bold text-primary mb-2">
           Distribuição de avaliações e NPS
         </h2>
-        <p className="font-sans text-sm text-muted leading-relaxed mb-1">
+        <p className="font-sans text-base text-muted leading-relaxed mb-1">
           A distribuição de notas no Olist segue o padrão clássico de
           marketplaces: quem tem boa experiência avalia 5; quem tem má
           experiência avalia 1. As notas intermediárias (2, 3) são
@@ -60,10 +60,10 @@ export default function ReviewsPage() {
 
       {/* Seção 2 — Score por categoria */}
       <section>
-        <h2 className="font-serif text-xl font-bold text-primary mb-2">
+        <h2 className="font-serif text-xl sm:text-2xl font-bold text-primary mb-2">
           Satisfação por categoria de produto
         </h2>
-        <p className="font-sans text-sm text-muted leading-relaxed mb-1">
+        <p className="font-sans text-base text-muted leading-relaxed mb-1">
           Nem todas as categorias geram a mesma satisfação. O gráfico abaixo
           ordena do pior para o melhor score médio. A linha de referência em
           4,0 marca o limiar de &ldquo;boa satisfação&rdquo; — categorias
@@ -84,10 +84,10 @@ export default function ReviewsPage() {
 
       {/* Seção 3 — Impacto do atraso */}
       <section>
-        <h2 className="font-serif text-xl font-bold text-primary mb-2">
+        <h2 className="font-serif text-xl sm:text-2xl font-bold text-primary mb-2">
           Cada dia de atraso custa na avaliação
         </h2>
-        <p className="font-sans text-sm text-muted leading-relaxed mb-1">
+        <p className="font-sans text-base text-muted leading-relaxed mb-1">
           Mais do que preço ou qualidade do produto, a entrega no prazo é o
           principal driver de satisfação no e-commerce. O gráfico abaixo mostra
           a queda abrupta: bastam 3 dias de atraso para o score médio cair de
@@ -108,10 +108,10 @@ export default function ReviewsPage() {
 
       {/* Seção 4 — Palavras frequentes */}
       <section>
-        <h2 className="font-serif text-xl font-bold text-primary mb-2">
+        <h2 className="font-serif text-xl sm:text-2xl font-bold text-primary mb-2">
           O que dizem as avaliações
         </h2>
-        <p className="font-sans text-sm text-muted leading-relaxed mb-1">
+        <p className="font-sans text-base text-muted leading-relaxed mb-1">
           As palavras mais frequentes nas avaliações 5★ e 1★ revelam o que
           importa para o cliente. Um detalhe interessante: &ldquo;prazo&rdquo;
           aparece nos dois grupos — elogiado quando a entrega é rápida,

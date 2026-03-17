@@ -19,10 +19,10 @@ export default function SazonalidadePage() {
     >
       {/* Seção 1 — Série temporal mensal */}
       <section>
-        <h2 className="font-serif text-xl font-bold text-primary mb-2">
+        <h2 className="font-serif text-xl sm:text-2xl font-bold text-primary mb-2">
           Tendência de receita mensal
         </h2>
-        <p className="font-sans text-sm text-muted leading-relaxed mb-1">
+        <p className="font-sans text-base text-muted leading-relaxed mb-1">
           O dataset cobre 20 meses (jan/2017–ago/2018) de um marketplace em
           fase de crescimento acelerado. A linha tracejada é a média móvel de
           3 meses, que suaviza ruídos pontuais e torna a tendência mais
@@ -43,10 +43,10 @@ export default function SazonalidadePage() {
 
       {/* Seção 2 — Padrão semanal */}
       <section>
-        <h2 className="font-serif text-xl font-bold text-primary mb-2">
+        <h2 className="font-serif text-xl sm:text-2xl font-bold text-primary mb-2">
           Pedidos por dia da semana
         </h2>
-        <p className="font-sans text-sm text-muted leading-relaxed mb-1">
+        <p className="font-sans text-base text-muted leading-relaxed mb-1">
           Quando o brasileiro compra online durante a semana? O padrão é claro
           e consistente ao longo de todo o período: mais pedidos no início da
           semana, queda progressiva até o domingo. Por que segundas-feiras
@@ -67,10 +67,10 @@ export default function SazonalidadePage() {
 
       {/* Seção 3 — Padrão horário */}
       <section>
-        <h2 className="font-serif text-xl font-bold text-primary mb-2">
+        <h2 className="font-serif text-xl sm:text-2xl font-bold text-primary mb-2">
           Pedidos por hora do dia
         </h2>
-        <p className="font-sans text-sm text-muted leading-relaxed mb-1">
+        <p className="font-sans text-base text-muted leading-relaxed mb-1">
           O e-commerce brasileiro tem dois horários nobres. A curva abaixo
           mostra a distribuição dos pedidos ao longo das 24 horas — e revela
           que o consumo online tem ritmo próprio, diferente do varejo físico.

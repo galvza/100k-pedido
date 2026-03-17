@@ -23,7 +23,7 @@ const VARIANT_LABELS: Record<CalloutVariant, string> = {
  */
 const Callout = ({ children, variant = "note", title }: CalloutProps) => (
   <aside
-    className={`my-4 rounded border-l-4 px-4 py-3 text-sm font-sans ${VARIANT_STYLES[variant]}`}
+    className={`my-4 rounded border-l-4 px-4 py-3 text-sm sm:text-base font-sans ${VARIANT_STYLES[variant]}`}
     role="note"
   >
     <p className="font-semibold mb-1">{title ?? VARIANT_LABELS[variant]}</p>

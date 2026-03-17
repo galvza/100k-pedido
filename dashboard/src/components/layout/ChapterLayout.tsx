@@ -20,7 +20,7 @@ const ChapterLayout = ({
 }: ChapterLayoutProps) => (
   <article className="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-10">
     <header className="mb-8 border-b border-border pb-6">
-      <h1 className="font-serif text-3xl sm:text-4xl font-bold text-primary text-balance">
+      <h1 className="font-serif text-2xl sm:text-4xl font-bold text-primary text-balance">
         {title}
       </h1>
       {subtitle && (

@@ -19,10 +19,10 @@ export default function FunilPage() {
     >
       {/* Seção 1 — Conversão por etapa */}
       <section>
-        <h2 className="font-serif text-xl font-bold text-primary mb-2">
+        <h2 className="font-serif text-xl sm:text-2xl font-bold text-primary mb-2">
           Conversão por etapa
         </h2>
-        <p className="font-sans text-sm text-muted leading-relaxed mb-1">
+        <p className="font-sans text-base text-muted leading-relaxed mb-1">
           O funil abaixo acompanha cada pedido desde o momento da compra até a
           entrega final. A pergunta central é: em qual etapa o processo perde
           mais pedidos? A resposta pode surpreender — a logística do marketplace
@@ -42,10 +42,10 @@ export default function FunilPage() {
 
       {/* Seção 2 — Tempo entre etapas */}
       <section>
-        <h2 className="font-serif text-xl font-bold text-primary mb-2">
+        <h2 className="font-serif text-xl sm:text-2xl font-bold text-primary mb-2">
           Quanto tempo leva cada etapa?
         </h2>
-        <p className="font-sans text-sm text-muted leading-relaxed mb-1">
+        <p className="font-sans text-base text-muted leading-relaxed mb-1">
           Se o funil mostra <em>quantos</em> pedidos avançam, o cronômetro
           mostra <em>quanto tempo</em> cada etapa consome. O gargalo não está no
           pagamento — está na estrada. A entrega é responsável por mais de 80%
@@ -66,10 +66,10 @@ export default function FunilPage() {
 
       {/* Seção 3 — Distribuição dos prazos */}
       <section>
-        <h2 className="font-serif text-xl font-bold text-primary mb-2">
+        <h2 className="font-serif text-xl sm:text-2xl font-bold text-primary mb-2">
           Distribuição do prazo de entrega
         </h2>
-        <p className="font-sans text-sm text-muted leading-relaxed mb-1">
+        <p className="font-sans text-base text-muted leading-relaxed mb-1">
           A maioria das entregas se concentra entre 8 e 14 dias — o prazo padrão
           dos Correios para envios dentro do Sudeste. Mas a cauda longa revela
           outra realidade: pedidos para o Norte e Nordeste podem levar mais de
