@@ -31,7 +31,7 @@ const Header = () => {
           {/* Logo */}
           <Link
             href="/"
-            className="font-serif text-lg font-bold text-primary hover:text-accent transition-colors"
+            className="font-serif text-lg font-bold text-primary hover:text-accent transition-colors cursor-pointer"
           >
             100k Pedidos
           </Link>
