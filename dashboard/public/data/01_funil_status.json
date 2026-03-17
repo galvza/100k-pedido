@@ -1,0 +1,10 @@
+[
+  { "status": "delivered",    "contagem": 96478, "percentual": 97.02 },
+  { "status": "shipped",      "contagem": 1107,  "percentual": 1.11  },
+  { "status": "canceled",     "contagem": 625,   "percentual": 0.63  },
+  { "status": "unavailable",  "contagem": 609,   "percentual": 0.61  },
+  { "status": "invoiced",     "contagem": 314,   "percentual": 0.32  },
+  { "status": "processing",   "contagem": 301,   "percentual": 0.30  },
+  { "status": "created",      "contagem": 5,     "percentual": 0.01  },
+  { "status": "approved",     "contagem": 2,     "percentual": 0.00  }
+]

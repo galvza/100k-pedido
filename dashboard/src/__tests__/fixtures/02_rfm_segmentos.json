@@ -1,0 +1,42 @@
+[
+  {
+    "segmento": "Champions",
+    "contagem": 12,
+    "percentual": 0.066,
+    "recencia_media": 15.3,
+    "frequencia_media": 3.2,
+    "monetario_medio": 892.45
+  },
+  {
+    "segmento": "Loyal",
+    "contagem": 25,
+    "percentual": 0.137,
+    "recencia_media": 45.7,
+    "frequencia_media": 2.1,
+    "monetario_medio": 534.12
+  },
+  {
+    "segmento": "Potential",
+    "contagem": 38,
+    "percentual": 0.209,
+    "recencia_media": 78.2,
+    "frequencia_media": 1.5,
+    "monetario_medio": 312.78
+  },
+  {
+    "segmento": "At Risk",
+    "contagem": 52,
+    "percentual": 0.286,
+    "recencia_media": 156.4,
+    "frequencia_media": 1.2,
+    "monetario_medio": 245.90
+  },
+  {
+    "segmento": "Lost",
+    "contagem": 55,
+    "percentual": 0.302,
+    "recencia_media": 298.1,
+    "frequencia_media": 1.0,
+    "monetario_medio": 178.33
+  }
+]

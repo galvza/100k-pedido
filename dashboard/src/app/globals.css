@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #1a1a1a;
+  --surface: #f9f9f7;
+  --border: #d1d5db;
+  --muted: #6b7280;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    color: var(--foreground);
+    background: var(--background);
+    font-family: var(--font-sans), system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.625;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif), Georgia, serif;
+    line-height: 1.25;
+    font-weight: 700;
+    color: var(--foreground);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .font-serif {
+    font-family: var(--font-serif), Georgia, serif;
+  }
+
+  .font-sans {
+    font-family: var(--font-sans), system-ui, sans-serif;
+  }
+}

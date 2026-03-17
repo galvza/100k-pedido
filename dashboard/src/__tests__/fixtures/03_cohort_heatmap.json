@@ -1,0 +1,21 @@
+{
+  "coortes": ["2017-01", "2017-02", "2017-03"],
+  "periodos": [0, 1, 2, 3],
+  "dados": [
+    {
+      "coorte": "2017-01",
+      "tamanho": 42,
+      "retencao": [1.0, 0.048, 0.024, 0.024]
+    },
+    {
+      "coorte": "2017-02",
+      "tamanho": 55,
+      "retencao": [1.0, 0.036, 0.018, null]
+    },
+    {
+      "coorte": "2017-03",
+      "tamanho": 63,
+      "retencao": [1.0, 0.032, null, null]
+    }
+  ]
+}

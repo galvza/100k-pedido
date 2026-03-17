@@ -1,0 +1,42 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# Dados
+data/raw/
+data/processed/
+
+# Node.js
+node_modules/
+.next/
+out/
+dashboard/out/
+dashboard/.next/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Env
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Coverage
+coverage/

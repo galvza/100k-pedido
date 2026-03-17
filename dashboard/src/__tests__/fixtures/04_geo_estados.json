@@ -1,0 +1,92 @@
+[
+  {
+    "estado": "SP",
+    "pedidos": 82,
+    "receita": 28456.78,
+    "ticket_medio": 347.03,
+    "frete_medio": 18.45,
+    "frete_percentual": 0.053,
+    "review_score_medio": 4.12
+  },
+  {
+    "estado": "RJ",
+    "pedidos": 34,
+    "receita": 10234.56,
+    "ticket_medio": 301.02,
+    "frete_medio": 22.30,
+    "frete_percentual": 0.074,
+    "review_score_medio": 3.89
+  },
+  {
+    "estado": "MG",
+    "pedidos": 24,
+    "receita": 7892.34,
+    "ticket_medio": 328.85,
+    "frete_medio": 25.12,
+    "frete_percentual": 0.076,
+    "review_score_medio": 3.95
+  },
+  {
+    "estado": "RS",
+    "pedidos": 12,
+    "receita": 4123.45,
+    "ticket_medio": 343.62,
+    "frete_medio": 32.78,
+    "frete_percentual": 0.095,
+    "review_score_medio": 3.75
+  },
+  {
+    "estado": "PR",
+    "pedidos": 11,
+    "receita": 3567.89,
+    "ticket_medio": 324.35,
+    "frete_medio": 28.90,
+    "frete_percentual": 0.089,
+    "review_score_medio": 4.05
+  },
+  {
+    "estado": "BA",
+    "pedidos": 9,
+    "receita": 2845.67,
+    "ticket_medio": 316.19,
+    "frete_medio": 38.45,
+    "frete_percentual": 0.122,
+    "review_score_medio": 3.62
+  },
+  {
+    "estado": "SC",
+    "pedidos": 8,
+    "receita": 2678.90,
+    "ticket_medio": 334.86,
+    "frete_medio": 30.15,
+    "frete_percentual": 0.090,
+    "review_score_medio": 4.18
+  },
+  {
+    "estado": "PE",
+    "pedidos": 6,
+    "receita": 1923.45,
+    "ticket_medio": 320.58,
+    "frete_medio": 42.30,
+    "frete_percentual": 0.132,
+    "review_score_medio": 3.50
+  },
+  {
+    "estado": "CE",
+    "pedidos": 5,
+    "receita": 1456.78,
+    "ticket_medio": 291.36,
+    "frete_medio": 45.60,
+    "frete_percentual": 0.157,
+    "review_score_medio": 3.40
+  },
+  {
+    "estado": "DF",
+    "pedidos": 4,
+    "receita": 1234.56,
+    "ticket_medio": 308.64,
+    "frete_medio": 20.80,
+    "frete_percentual": 0.067,
+    "review_score_medio": 4.00
+  }
+]

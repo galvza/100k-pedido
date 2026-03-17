@@ -1,0 +1,74 @@
+[
+  {
+    "mes": "2017-01",
+    "pedidos": 8,
+    "receita": 2456.78,
+    "media_movel_3m": null
+  },
+  {
+    "mes": "2017-02",
+    "pedidos": 10,
+    "receita": 3123.45,
+    "media_movel_3m": null
+  },
+  {
+    "mes": "2017-03",
+    "pedidos": 12,
+    "receita": 3890.12,
+    "media_movel_3m": 3156.78
+  },
+  {
+    "mes": "2017-04",
+    "pedidos": 15,
+    "receita": 4567.89,
+    "media_movel_3m": 3860.49
+  },
+  {
+    "mes": "2017-05",
+    "pedidos": 14,
+    "receita": 4234.56,
+    "media_movel_3m": 4230.86
+  },
+  {
+    "mes": "2017-06",
+    "pedidos": 16,
+    "receita": 5012.34,
+    "media_movel_3m": 4604.93
+  },
+  {
+    "mes": "2017-07",
+    "pedidos": 18,
+    "receita": 5678.90,
+    "media_movel_3m": 4975.27
+  },
+  {
+    "mes": "2017-08",
+    "pedidos": 20,
+    "receita": 6234.56,
+    "media_movel_3m": 5641.93
+  },
+  {
+    "mes": "2017-09",
+    "pedidos": 17,
+    "receita": 5456.78,
+    "media_movel_3m": 5790.08
+  },
+  {
+    "mes": "2017-10",
+    "pedidos": 22,
+    "receita": 7123.45,
+    "media_movel_3m": 6271.60
+  },
+  {
+    "mes": "2017-11",
+    "pedidos": 28,
+    "receita": 9876.54,
+    "media_movel_3m": 7485.59
+  },
+  {
+    "mes": "2017-12",
+    "pedidos": 20,
+    "receita": 6345.67,
+    "media_movel_3m": 7781.89
+  }
+]
