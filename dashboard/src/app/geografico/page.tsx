@@ -14,8 +14,8 @@ export default function GeograficoPage() {
   return (
     <ChapterLayout
       title="Análise Geográfica"
-      subtitle="De onde vêm os pedidos? Como o custo do frete molda a satisfação a cada quilômetro do centroide?"
-      tecnicas={["JOINs multi-tabela", "Mann-Whitney U", "Spearman", "Subqueries"]}
+      subtitle="De onde vêm os pedidos? Como o custo do frete molda a experiência do cliente a cada quilômetro de distância?"
+      tecnicas={["JOINs multi-tabela", "Teste estatístico", "Correlação estatística", "Subqueries"]}
     >
       {/* Seção 1 — Mapa interativo */}
       <section>
@@ -23,20 +23,21 @@ export default function GeograficoPage() {
           Distribuição geográfica dos pedidos
         </h2>
         <p className="font-sans text-sm text-muted leading-relaxed mb-1">
-          São Paulo concentra mais de 40% dos pedidos e da receita — reflexo
-          direto da maior densidade populacional e renda per capita do país.
-          Selecione a métrica para alternar a visualização entre volume de
-          pedidos, receita total e satisfação média por estado.
+          O mapa abaixo mostra como o e-commerce se distribui pelo Brasil. A
+          concentração no Sudeste é esperada — mas o que acontece com a
+          experiência do cliente à medida que o pedido viaja para longe dos
+          centros logísticos? Selecione a métrica para alternar entre volume de
+          pedidos, receita e satisfação.
         </p>
 
         <BrazilMapWrapper />
 
         <Insight>
-          <strong>Sudeste domina o volume, Norte e Nordeste pagam mais frete.</strong>{" "}
-          SP, RJ e MG respondem por ~67% dos pedidos. Estados do Norte
-          (AM, RR, AC, AP) têm frete médio acima de R$ 50 — mais de 3× o
-          custo no estado de São Paulo — e consistentemente os menores
-          review scores do dataset.
+          <strong>São Paulo concentra 42% dos pedidos — mas quem paga o preço da
+          distância é o Norte.</strong> SP, RJ e MG respondem por ~67% do volume.
+          Estados do Norte (AM, RR, AC, AP) pagam frete médio acima de R$ 50 —
+          mais de 3× o custo em São Paulo — e, não por coincidência, registram
+          as piores avaliações do dataset.
         </Insight>
       </section>
 
@@ -46,10 +47,11 @@ export default function GeograficoPage() {
           Ranking dos estados
         </h2>
         <p className="font-sans text-sm text-muted leading-relaxed mb-1">
-          Use os botões para reordenar a tabela por pedidos, receita, frete
-          médio ou satisfação. O gradiente de custo de frete entre regiões é
-          visível: estados do Sudeste pagam 11–18% do valor em frete; estados
-          do Norte pagam 42–60%.
+          Reordene a tabela por qualquer métrica. O gradiente de custo entre
+          regiões é visível: estados do Sudeste pagam 11–18% do valor do pedido
+          em frete; estados do Norte, 42–60%. O frete como percentual do pedido
+          é um indicador mais revelador do que o valor absoluto — mostra o peso
+          real da logística na decisão de compra.
         </p>
 
         <StateRanking />
@@ -58,23 +60,25 @@ export default function GeograficoPage() {
       {/* Seção 3 — Correlação frete × satisfação */}
       <section>
         <h2 className="font-serif text-xl font-bold text-primary mb-2">
-          Frete impacta satisfação?
+          Frete mais caro, avaliação mais baixa?
         </h2>
         <p className="font-sans text-sm text-muted leading-relaxed mb-1">
-          Cada ponto no scatter representa um estado. O eixo horizontal
-          mostra o frete como percentual do valor do pedido; o eixo vertical,
-          o review score médio. A tendência descendente sugere correlação
-          negativa — verificada pelo teste de Spearman.
+          Cada ponto no gráfico representa um estado brasileiro. O eixo
+          horizontal mostra o frete como percentual do valor do pedido; o
+          vertical, o score médio de avaliação. A tendência descendente é
+          clara — e o teste de correlação de Spearman confirma: existe
+          associação negativa significativa (p &lt; 0,01) entre custo de frete
+          e satisfação do cliente.
         </p>
 
         <CorrelationChart />
 
-        <Callout variant="warning" title="Causalidade vs correlação">
+        <Callout variant="warning" title="Correlação não é causalidade">
           A correlação Spearman mede associação, não causalidade. O frete mais
-          alto nos estados do Norte e Nordeste coincide com menor infraestrutura
-          logística, menor renda disponível e potencial maior insatisfação com
-          atrasos — fatores confundidores que o dataset não permite isolar
-          individualmente.
+          alto nos estados do Norte coincide com menor infraestrutura logística,
+          prazos de entrega mais longos e potencial maior insatisfação com
+          atrasos — fatores confundidores que o dataset não permite isolar.
+          O frete pode ser um proxy da distância, que é o verdadeiro driver.
         </Callout>
       </section>
     </ChapterLayout>

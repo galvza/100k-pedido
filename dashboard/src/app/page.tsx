@@ -9,43 +9,43 @@ const CHAPTER_META: Record<
   funil: {
     num: "01",
     description:
-      "Do primeiro clique à entrega: taxas de conversão em cada etapa do processo de compra.",
-    tecnicas: ["JOINs", "CTEs", "Funil de conversão"],
+      "De cada 100 pedidos, quantos chegam ao destino? O gargalo não está onde você imagina.",
+    tecnicas: ["JOINs", "Subqueries encadeadas", "Funil de conversão"],
   },
   rfm: {
     num: "02",
     description:
-      "Segmentação comportamental por Recência, Frequência e Valor monetário dos clientes.",
-    tecnicas: ["Window Functions", "K-Means", "Clustering"],
+      "Um em cada três clientes nunca mais voltou. Quem são os valiosos — e os que já se foram?",
+    tecnicas: ["Funções analíticas SQL", "Clustering K-Means"],
   },
   cohort: {
     num: "03",
     description:
-      "Clientes que compraram no mesmo mês retornam? Análise de retenção cohort a cohort.",
-    tecnicas: ["CTEs aninhadas", "Pivot", "Retenção"],
+      "A taxa de recompra de 3% parece baixa — mas conta uma história conhecida do marketplace.",
+    tecnicas: ["Subqueries encadeadas", "Pivot", "Retenção"],
   },
   geografico: {
     num: "04",
     description:
-      "Como vendas, frete e satisfação variam entre os 27 estados brasileiros.",
-    tecnicas: ["GROUP BY", "Correlação", "Geoespacial"],
+      "SP concentra 42% dos pedidos. O Norte paga 3× mais frete — e avalia pior. Coincidência?",
+    tecnicas: ["GROUP BY", "Correlação estatística", "Geoespacial"],
   },
   sazonalidade: {
     num: "05",
     description:
-      "Padrões temporais de demanda: tendência, sazonalidade e ciclos semanais.",
-    tecnicas: ["DATE_TRUNC", "Decomposição sazonal", "Série temporal"],
+      "Black Friday, segundas-feiras e o horário nobre do e-commerce: quando o Brasil compra online.",
+    tecnicas: ["Cálculos de data SQL", "Decomposição sazonal", "Série temporal"],
   },
   reviews: {
     num: "06",
     description:
-      "O que determina a nota do cliente? Atraso na entrega, categoria e sentimento textual.",
-    tecnicas: ["STRING_AGG", "Análise de texto", "Testes de hipótese"],
+      "Cada dia de atraso custa meio ponto na avaliação. O frete define a experiência mais do que o produto.",
+    tecnicas: ["Análise de texto", "Teste estatístico"],
   },
 };
 
 const STATS = [
-  { value: "~100k", label: "pedidos analisados" },
+  { value: "99.441", label: "pedidos analisados" },
   { value: "9", label: "tabelas relacionais" },
   { value: "6", label: "capítulos analíticos" },
   { value: "2016–2018", label: "período coberto" },
@@ -54,7 +54,7 @@ const STATS = [
 const SKILLS = [
   {
     area: "SQL",
-    items: ["DuckDB", "JOINs complexos", "CTEs", "Window Functions", "Agregações"],
+    items: ["DuckDB", "JOINs complexos", "Subqueries encadeadas", "Funções analíticas", "Agregações"],
   },
   {
     area: "Python",
@@ -73,18 +73,22 @@ export default function Home() {
       <section className="bg-surface border-b border-border">
         <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
           <p className="font-sans text-sm font-medium text-accent uppercase tracking-widest mb-4">
-            Projeto de portfólio
+            Projeto de portfólio — Análise de dados
           </p>
           <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-primary text-balance leading-tight">
-            100k Pedidos
+            100 mil pedidos.
+            <br />
+            O que eles revelam?
           </h1>
           <p className="font-serif text-xl sm:text-2xl text-muted mt-3 text-balance">
             Raio-X do E-commerce Brasileiro
           </p>
           <p className="font-sans text-base text-muted mt-6 max-w-2xl text-balance leading-relaxed">
-            Pipeline completo de análise de dados usando 100 mil pedidos reais
-            do marketplace Olist. SQL analítico no DuckDB, estatística e ML em
-            Python, e visualização interativa em Next.js com Recharts.
+            9 tabelas. 2 anos de dados reais do maior marketplace brasileiro.
+            Um pipeline completo — do SQL analítico no DuckDB, passando por
+            estatística e machine learning em Python, até visualização interativa
+            em Next.js. Cada capítulo abaixo é uma pergunta de negócio
+            respondida com dados.
           </p>
 
           {/* Stats */}
@@ -112,7 +116,8 @@ export default function Home() {
           Capítulos
         </h2>
         <p className="font-sans text-sm text-muted mb-8">
-          Cada capítulo é uma análise independente com visualizações interativas.
+          Seis perguntas de negócio, seis análises independentes com
+          visualizações interativas e narrativa editorial.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -157,23 +162,25 @@ export default function Home() {
           </h2>
           <div className="max-w-3xl space-y-4 font-sans text-base text-foreground leading-relaxed">
             <p>
-              O dataset <strong>Olist Brazilian E-Commerce</strong> contém 9
-              tabelas relacionais com informações de pedidos, produtos,
-              clientes, vendedores, pagamentos e reviews de um marketplace
-              brasileiro real entre setembro de 2016 e outubro de 2018.
+              O dataset <strong>Olist Brazilian E-Commerce</strong> é público,
+              real e tem 99.441 pedidos realizados entre setembro de 2016 e
+              outubro de 2018 no maior marketplace brasileiro. São 9 tabelas
+              relacionais com informações de pedidos, produtos, clientes,
+              vendedores, pagamentos e avaliações.
             </p>
             <p>
-              O pipeline começa com a ingestão dos CSVs no DuckDB, onde queries
-              SQL analíticas extraem os indicadores de cada capítulo. Em
-              seguida, análises em Python aplicam estatística descritiva, testes
-              de hipótese, clustering K-Means e um modelo preditivo de atraso em
-              Logistic Regression e Random Forest. Os resultados são exportados
-              como JSONs estáticos consumidos por este dashboard.
+              Este projeto demonstra o pipeline completo de um analista de dados:
+              ingestão dos CSVs no DuckDB, queries SQL analíticas para extrair
+              indicadores de cada capítulo, análises em Python com testes de
+              hipótese, clustering K-Means e modelo preditivo, e por fim a
+              visualização interativa neste dashboard. Todo o código é testado,
+              documentado e reproduzível.
             </p>
             <p>
-              O objetivo é demonstrar o pipeline completo de um projeto de dados
-              — da engenharia de dados à visualização final — com código
-              testado, documentado e reproducível.
+              O objetivo não é apenas mostrar gráficos — é contar a história
+              que os dados revelam sobre o e-commerce brasileiro: onde estão os
+              gargalos, quem são os clientes, o que determina a satisfação e
+              como o tempo e a geografia moldam o consumo online no Brasil.
             </p>
           </div>
         </div>

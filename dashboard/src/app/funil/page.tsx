@@ -14,8 +14,8 @@ export default function FunilPage() {
   return (
     <ChapterLayout
       title="Funil de Vendas"
-      subtitle="Quantos pedidos completam cada etapa — da compra à entrega no cliente?"
-      tecnicas={["CTEs", "CASE WHEN", "DATE_DIFF", "Agregação condicional"]}
+      subtitle="De cada 100 pedidos feitos no Olist, quantos chegam de fato ao destino — e onde o processo trava?"
+      tecnicas={["Subqueries encadeadas", "Lógica condicional SQL", "Cálculos de data SQL", "Agregação condicional"]}
     >
       {/* Seção 1 — Conversão por etapa */}
       <section>
@@ -23,19 +23,20 @@ export default function FunilPage() {
           Conversão por etapa
         </h2>
         <p className="font-sans text-sm text-muted leading-relaxed mb-1">
-          O funil mede a proporção de pedidos que avançam em cada estágio do
-          processo: compra, aprovação do pagamento, envio à transportadora e
-          entrega ao cliente. Cada barra representa o percentual em relação ao
-          total de pedidos realizados.
+          O funil abaixo acompanha cada pedido desde o momento da compra até a
+          entrega final. A pergunta central é: em qual etapa o processo perde
+          mais pedidos? A resposta pode surpreender — a logística do marketplace
+          é mais eficiente do que a intuição sugere.
         </p>
 
         <FunnelBar />
 
         <Insight>
-          <strong>97,0% dos pedidos chegam ao destino.</strong> A maior perda
-          ocorre na aprovação do pagamento — 1,8% dos pedidos não passam dessa
-          etapa, possivelmente por recusa de cartão ou expiração de boleto.
-          Do pagamento aprovado em diante, a taxa de conclusão é acima de 99%.
+          <strong>De cada 100 pedidos, 97 chegam ao destino.</strong> A maior
+          perda ocorre na aprovação do pagamento — 1,8% dos pedidos não passam
+          dessa etapa, possivelmente por recusa de cartão ou expiração de boleto.
+          A partir da aprovação, a taxa de conclusão supera 99%. Uma velocidade
+          que seria impensável no varejo físico.
         </Insight>
       </section>
 
@@ -45,19 +46,19 @@ export default function FunilPage() {
           Quanto tempo leva cada etapa?
         </h2>
         <p className="font-sans text-sm text-muted leading-relaxed mb-1">
-          Cada barra representa o tempo médio decorrido entre a etapa e a
-          anterior. O pagamento é aprovado em menos de 12 horas; o envio à
-          transportadora leva em média 2,5 dias; e a entrega final domina o
-          tempo total com mais de 12 dias.
+          Se o funil mostra <em>quantos</em> pedidos avançam, o cronômetro
+          mostra <em>quanto tempo</em> cada etapa consome. O gargalo não está no
+          pagamento — está na estrada. A entrega é responsável por mais de 80%
+          do tempo total entre a compra e o recebimento.
         </p>
 
         <TimelineChart />
 
         <Insight>
-          <strong>O prazo de entrega responde por 80% do tempo total.</strong>{" "}
+          <strong>O pagamento é aprovado em ~10 horas; a entrega leva 12 dias.</strong>{" "}
           Da aprovação até o cliente receber, passam em média 14,6 dias. A
-          etapa mais rápida é a aprovação do pagamento (&lt; 0,5 dia),
-          refletindo a automação dos gateways de pagamento.
+          automação dos gateways de pagamento resolveu a velocidade financeira —
+          o desafio logístico de um país continental, ainda não.
         </Insight>
       </section>
 
@@ -67,31 +68,30 @@ export default function FunilPage() {
           Distribuição do prazo de entrega
         </h2>
         <p className="font-sans text-sm text-muted leading-relaxed mb-1">
-          A distribuição mostra a concentração de entregas por faixa de prazo.
-          A curva é assimétrica à direita: a maioria das entregas se concentra
-          entre 8 e 14 dias, com uma cauda longa de pedidos que demoram mais
-          de 30 dias — geralmente destinados a regiões remotas do Norte e
-          Nordeste.
+          A maioria das entregas se concentra entre 8 e 14 dias — o prazo padrão
+          dos Correios para envios dentro do Sudeste. Mas a cauda longa revela
+          outra realidade: pedidos para o Norte e Nordeste podem levar mais de
+          30 dias, um reflexo da infraestrutura logística desigual do país.
         </p>
 
         <DeliveryHistogram />
 
         <Insight>
-          <strong>62% das entregas acontecem em até 14 dias.</strong> Apenas
-          5,2% dos pedidos entregues levam mais de 30 dias. O pico na faixa de
-          8–14 dias reflete o prazo padrão dos Correios para envios dentro dos
-          estados mais populosos do Sudeste.
+          <strong>Seis em cada dez entregas chegam em até 14 dias.</strong>{" "}
+          Apenas 5,2% dos pedidos entregues levam mais de 30 dias — mas são
+          justamente esses que geram as piores avaliações, como veremos no
+          capítulo de Reviews.
         </Insight>
       </section>
 
       {/* Callout L06 */}
-      <Callout variant="note" title="Limitação metodológica (L06)">
+      <Callout variant="note" title="Limitação metodológica">
         Este funil é construído a partir do <strong>status final</strong> de
-        cada pedido, não de eventos de navegação. Isso significa que não
-        capturamos abandonos de carrinho ou desistências antes da compra —
-        apenas pedidos que chegaram a ser registrados no sistema Olist. O
-        funil real de conversão (visita → carrinho → checkout → pedido) não
-        está disponível neste dataset.
+        cada pedido, não de eventos de navegação. Não capturamos abandonos de
+        carrinho ou desistências antes da compra — apenas pedidos que chegaram
+        a ser registrados no sistema. O funil real de conversão
+        (visita → carrinho → checkout → pedido) não está disponível neste
+        dataset.
       </Callout>
     </ChapterLayout>
   );

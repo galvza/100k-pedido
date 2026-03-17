@@ -1,6 +1,5 @@
 "use client";
 
-import "leaflet/dist/leaflet.css";
 import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
 import type { FeatureCollection } from "geojson";
@@ -43,8 +42,12 @@ export default function BrazilMap({ data, metric }: BrazilMapProps) {
 
   useEffect(() => {
     fetch("/geo/brazil-states.geojson")
-      .then((r) => r.json())
-      .then(setGeoData);
+      .then((r) => {
+        if (!r.ok) throw new Error(`GeoJSON fetch failed: ${r.status}`);
+        return r.json();
+      })
+      .then(setGeoData)
+      .catch((err) => console.error("[BrazilMap]", err));
   }, []);
 
   const { min, max } = buildScale(data, metric);

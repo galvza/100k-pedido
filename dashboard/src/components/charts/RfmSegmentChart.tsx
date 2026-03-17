@@ -18,11 +18,11 @@ import { CHART_CONFIG, MUTED_COLOR } from "@/lib/constants";
 
 /** Cor semântica por segmento RFM. */
 const SEGMENT_COLORS: Record<string, string> = {
-  Champions: "#2563EB",
-  Loyal:     "#059669",
-  Potential: "#0891B2",
-  "At Risk": "#D97706",
-  Lost:      "#DC2626",
+  "Campeões":  "#2563EB",
+  "Fiéis":     "#059669",
+  "Potenciais": "#0891B2",
+  "Em Risco":  "#D97706",
+  "Perdidos":  "#DC2626",
 };
 
 const DEFAULT_COLOR = "#6B7280";

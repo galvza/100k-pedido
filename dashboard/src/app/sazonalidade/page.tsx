@@ -14,8 +14,8 @@ export default function SazonalidadePage() {
   return (
     <ChapterLayout
       title="Sazonalidade"
-      subtitle="Quando os brasileiros compram? Tendência, dia da semana e hora do dia revelam padrões de consumo recorrentes."
-      tecnicas={["DATE_TRUNC", "EXTRACT", "Window Functions", "LAG", "Média Móvel"]}
+      subtitle="Quando os brasileiros compram online? Tendência de crescimento, Black Friday, dia da semana e hora do dia revelam padrões previsíveis — e oportunidades."
+      tecnicas={["Cálculos de data SQL", "Extração temporal SQL", "Funções analíticas SQL", "Comparação entre períodos", "Média Móvel"]}
     >
       {/* Seção 1 — Série temporal mensal */}
       <section>
@@ -23,20 +23,21 @@ export default function SazonalidadePage() {
           Tendência de receita mensal
         </h2>
         <p className="font-sans text-sm text-muted leading-relaxed mb-1">
-          O dataset cobre 20 meses (jan/2017–ago/2018). A linha tracejada é
-          a média móvel de 3 meses — suaviza ruídos pontuais e torna a
-          tendência de crescimento mais legível. Novembro de 2017 destoa
-          claramente: pico de Black Friday com receita ~67% acima do mês anterior.
+          O dataset cobre 20 meses (jan/2017–ago/2018) de um marketplace em
+          fase de crescimento acelerado. A linha tracejada é a média móvel de
+          3 meses, que suaviza ruídos pontuais e torna a tendência mais
+          legível. Um mês se destaca claramente: novembro de 2017.
         </p>
 
         <TimeSeriesChart />
 
         <Insight>
-          <strong>Crescimento sustentado, com sazonalidade Black Friday.</strong>{" "}
-          A receita sai de R$ 110k em jan/2017 para ~R$ 890k em ago/2018 —
-          crescimento de 8× em 20 meses. A média móvel mostra que o pico de
-          novembro/2017 não foi permanente: o período pós-BF teve queda, mas
-          a tendência de longo prazo retomou o crescimento em 2018.
+          <strong>A receita cresceu 8× em 20 meses — de R$ 110 mil para
+          ~R$ 890 mil.</strong> O pico de novembro/2017 (Black Friday) trouxe
+          receita ~67% acima do mês anterior, mas foi temporário: o período
+          pós-BF teve queda natural. A média móvel mostra que a tendência de
+          longo prazo retomou o crescimento em 2018, indicando que o Olist
+          estava em expansão sustentada, não apenas inflado por promoções.
         </Insight>
       </section>
 
@@ -46,19 +47,21 @@ export default function SazonalidadePage() {
           Pedidos por dia da semana
         </h2>
         <p className="font-sans text-sm text-muted leading-relaxed mb-1">
-          Cada barra mostra a média diária de pedidos para aquele dia da semana
-          ao longo de todo o período. O padrão reflete o comportamento de compra
-          dos consumidores: mais ativos no início da semana, queda progressiva
-          até o fim de semana.
+          Quando o brasileiro compra online durante a semana? O padrão é claro
+          e consistente ao longo de todo o período: mais pedidos no início da
+          semana, queda progressiva até o domingo. Por que segundas-feiras
+          lideram?
         </p>
 
         <WeekdayChart />
 
         <Insight>
-          <strong>Segunda e terça-feira dominam.</strong> Segunda-feira tem ~88%
-          mais pedidos que domingo — o consumidor compra no início da semana,
-          talvez após browsing no fim de semana. O sábado e domingo concentram
-          menos de 20% do volume semanal.
+          <strong>Segunda-feira tem ~88% mais pedidos que domingo.</strong>{" "}
+          O consumidor pesquisa no fim de semana mas finaliza a compra no
+          início da semana — possivelmente no horário de trabalho, quando tem
+          acesso ao computador. Sábado e domingo concentram menos de 20% do
+          volume semanal. Para campanhas de marketing, segunda e terça são os
+          dias de maior conversão potencial.
         </Insight>
       </section>
 
@@ -68,19 +71,20 @@ export default function SazonalidadePage() {
           Pedidos por hora do dia
         </h2>
         <p className="font-sans text-sm text-muted leading-relaxed mb-1">
-          Distribuição dos pedidos ao longo das 24 horas do dia. Revela dois
-          picos distintos: o matutino (hora do trabalho) e o noturno (após o
-          jantar). O mínimo absoluto ocorre entre 3h e 5h da madrugada.
+          O e-commerce brasileiro tem dois horários nobres. A curva abaixo
+          mostra a distribuição dos pedidos ao longo das 24 horas — e revela
+          que o consumo online tem ritmo próprio, diferente do varejo físico.
         </p>
 
         <HourlyChart />
 
         <Insight>
-          <strong>Dois picos: 10h e 20h.</strong> O horário de pico noturno
-          (20–21h) supera ligeiramente o matutino (10h), sugerindo que parte
-          dos consumidores navega após o trabalho. Campanhas de e-mail
-          marketing ou push notification têm maior probabilidade de conversão
-          nessas janelas.
+          <strong>Dois picos: 10h (horário de trabalho) e 20h (após o
+          jantar).</strong> O pico noturno supera ligeiramente o matutino,
+          sugerindo que parte dos consumidores navega após o expediente. O
+          vale entre 3h e 5h é o mínimo absoluto (67 pedidos). Para e-mail
+          marketing e notificações push, as janelas de 9–11h e 19–21h
+          oferecem a maior probabilidade de conversão.
         </Insight>
 
         <Callout variant="note" title="Fuso horário">

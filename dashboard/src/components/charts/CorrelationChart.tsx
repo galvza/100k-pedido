@@ -79,7 +79,7 @@ export default function CorrelationChart() {
           <YAxis
             dataKey="y"
             type="number"
-            name="Score"
+            name="Satisfação"
             domain={[3.0, 4.3]}
             tick={{ fontSize: CHART_CONFIG.fontSizeAxis, fill: MUTED_COLOR }}
           >

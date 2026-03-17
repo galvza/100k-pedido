@@ -18,7 +18,7 @@ const Footer = () => (
       <p>
         Código:{" "}
         <a
-          href="https://github.com/bielawskimikael/100k-pedidos"
+          href="https://github.com/galvza/100k-pedidos"
           target="_blank"
           rel="noopener noreferrer"
           className="underline hover:text-foreground transition-colors"

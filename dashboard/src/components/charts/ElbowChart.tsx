@@ -27,7 +27,7 @@ const CustomTooltip = ({ active, payload, label }: TooltipPayload) => {
     <div className="bg-white border border-border rounded px-3 py-2 text-xs font-sans shadow-sm">
       <p className="font-semibold text-primary mb-1">k = {label}</p>
       <p className="text-foreground">
-        Inércia: <span className="font-medium">{payload[0].value.toLocaleString("pt-BR")}</span>
+        Dispersão: <span className="font-medium">{payload[0].value.toLocaleString("pt-BR")}</span>
       </p>
     </div>
   );

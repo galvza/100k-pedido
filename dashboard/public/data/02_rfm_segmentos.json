@@ -1,6 +1,6 @@
 [
   {
-    "segmento": "Champions",
+    "segmento": "Campeões",
     "contagem": 8245,
     "percentual": 8.55,
     "recencia_media": 24,
@@ -11,7 +11,7 @@
     "m_score_medio": 5.0
   },
   {
-    "segmento": "Loyal",
+    "segmento": "Fiéis",
     "contagem": 14658,
     "percentual": 15.20,
     "recencia_media": 78,
@@ -22,7 +22,7 @@
     "m_score_medio": 3.9
   },
   {
-    "segmento": "Potential",
+    "segmento": "Potenciais",
     "contagem": 18930,
     "percentual": 19.63,
     "recencia_media": 162,
@@ -33,7 +33,7 @@
     "m_score_medio": 3.1
   },
   {
-    "segmento": "At Risk",
+    "segmento": "Em Risco",
     "contagem": 21870,
     "percentual": 22.68,
     "recencia_media": 340,
@@ -44,7 +44,7 @@
     "m_score_medio": 2.4
   },
   {
-    "segmento": "Lost",
+    "segmento": "Perdidos",
     "contagem": 32758,
     "percentual": 33.96,
     "recencia_media": 512,

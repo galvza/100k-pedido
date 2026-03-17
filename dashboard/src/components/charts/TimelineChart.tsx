@@ -29,7 +29,11 @@ const CustomTooltip = ({ active, payload, label }: TooltipPayload) => {
       <p className="text-foreground">
         Tempo médio:{" "}
         <span className="font-medium">
-          {dias === 0 ? "referência" : `${dias.toFixed(2)} dias`}
+          {dias === 0
+            ? "referência"
+            : dias < 1
+              ? `~${Math.round(dias * 24)} horas`
+              : `${dias.toFixed(1)} dias`}
         </span>
       </p>
     </div>

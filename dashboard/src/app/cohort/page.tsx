@@ -13,8 +13,8 @@ export default function CohortPage() {
   return (
     <ChapterLayout
       title="Análise de Cohort"
-      subtitle="Clientes que compraram no mesmo mês retornam? Coorte a coorte, mês a mês."
-      tecnicas={["CTE encadeado", "DATE_TRUNC", "DATE_DIFF", "Window Functions"]}
+      subtitle="Clientes que compraram no mesmo mês retornam? A resposta revela a dinâmica real de um marketplace."
+      tecnicas={["Subqueries encadeadas", "Cálculos de data SQL", "Funções analíticas SQL"]}
     >
       {/* Seção 1 — O que é */}
       <section>
@@ -23,11 +23,11 @@ export default function CohortPage() {
         </h2>
         <p className="font-sans text-sm text-muted leading-relaxed">
           Uma coorte é um grupo de clientes que fez a primeira compra no mesmo
-          mês. A análise acompanha cada coorte ao longo do tempo e mede a
-          proporção que volta a comprar nos meses seguintes. O resultado é um
-          heatmap de retenção: linhas são as coortes, colunas são os meses
-          desde a primeira compra (M+0, M+1, M+2...). A célula M+0 é sempre
-          100% — toda a coorte está presente no mês de estreia.
+          mês. Acompanhamos cada grupo ao longo do tempo e medimos a proporção
+          que volta a comprar nos meses seguintes. O resultado é o heatmap
+          abaixo: linhas são as coortes, colunas são os meses desde a primeira
+          compra (M+0 é sempre 100%). A pergunta é: quanto dessa base inicial
+          permanece ativa?
         </p>
       </section>
 
@@ -38,18 +38,18 @@ export default function CohortPage() {
         </h2>
         <p className="font-sans text-sm text-muted leading-relaxed mb-1">
           Verde escuro indica alta retenção; branco indica ausência de retorno.
-          Células cinzas representam períodos futuros (além do horizonte do
-          dataset). O padrão triangular é esperado: coortes mais recentes têm
-          menos meses de observação disponíveis.
+          Células cinzas são períodos futuros (além do horizonte do dataset).
+          O padrão triangular é esperado: coortes mais recentes têm menos meses
+          de observação.
         </p>
 
         <CohortHeatmap />
 
         <Insight>
-          <strong>O padrão é consistente em todas as coortes:</strong> a
-          retenção cai abruptamente de 100% (M+0) para 5–7% em M+1, depois
-          para 2–4% em M+2, e se estabiliza em torno de 0,3–0,5% a partir de
-          M+6. Não há coorte com recuperação significativa — o que era esperado
+          <strong>A queda é abrupta e consistente em todas as coortes.</strong>{" "}
+          De 100% em M+0, a retenção despenca para 5–7% em M+1, depois para
+          2–4% em M+2, e se estabiliza em torno de 0,3–0,5% a partir de M+6.
+          Nenhuma coorte mostra recuperação significativa — o que era esperado
           para um marketplace generalista.
         </Insight>
       </section>
@@ -68,24 +68,23 @@ export default function CohortPage() {
         <RetentionSummary />
 
         <Insight>
-          <strong>93% dos clientes compraram apenas uma vez.</strong>{" "}
-          Este número, que pode parecer alarmante, é na verdade o padrão do
-          modelo de marketplace: o cliente compra de um vendedor via Olist,
-          mas a próxima compra pode ser com outro vendedor na mesma plataforma
-          — o que não aparece como recompra no nível do cliente individual.
+          <strong>A taxa de recompra de ~7% pode parecer baixa, mas conta uma
+          história conhecida do marketplace.</strong> O cliente compra um
+          colchão, fica satisfeito, mas não precisa de outro por anos. A
+          retenção baixa não é necessariamente insatisfação — é a natureza do
+          consumo. Em e-commerces próprios, taxas de 20–40% em M+1 são
+          saudáveis; em marketplaces, o benchmark é muito menor.
         </Insight>
       </section>
 
       {/* Callout — Marketplace vs loja própria */}
       <Callout variant="info" title="Marketplace vs loja própria">
-        Em e-commerces próprios, taxas de retenção de 20–40% em M+1 são
-        consideradas saudáveis. Em marketplaces como Olist, Amazon ou Shopee,
-        a &ldquo;retenção&rdquo; do ponto de vista do dataset reflete
-        apenas recompras com o <em>mesmo vendedor</em> ou registradas com o
-        mesmo <code>customer_unique_id</code>. A retenção real da
-        <em> plataforma</em> é invisível neste dataset — os 93% que
-        &ldquo;não voltaram&rdquo; podem ter continuado comprando via Olist,
-        porém de outros vendedores.
+        Em marketplaces como Olist, Amazon ou Shopee, a &ldquo;retenção&rdquo;
+        do ponto de vista do dataset reflete apenas recompras com o{" "}
+        <em>mesmo vendedor</em> ou registradas com o mesmo identificador de
+        cliente. A retenção real da <em>plataforma</em> é invisível neste
+        dataset — os 93% que &ldquo;não voltaram&rdquo; podem ter continuado
+        comprando via Olist, porém de outros vendedores.
       </Callout>
     </ChapterLayout>
   );
