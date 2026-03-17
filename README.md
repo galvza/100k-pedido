@@ -131,37 +131,23 @@ npm run dev   # http://localhost:3000
 
 ## Deploy no Cloudflare Pages
 
-### Configuração do projeto
+**Configuração:**
 
-No painel do Cloudflare Pages, configure:
-
-| Configuração | Valor |
-|-------------|-------|
-| Build command | `bash scripts/build.sh` |
+| Campo | Valor |
+|-------|-------|
+| Framework preset | Next.js (Static HTML Export) |
+| Build command | `cd dashboard && npm install && npm run build` |
 | Build output directory | `dashboard/out` |
-| Root directory | `/` (raiz do repositório) |
 | NODE_VERSION (env var) | `20` |
 
-> **Atenção:** O `build.sh` requer que `data/output/` tenha os JSONs. Como o pipeline não roda no Cloudflare (os dados do DuckDB são locais), os JSONs devem estar **commitados** em `data/output/` antes do deploy — ou o build command deve ser apenas `cd dashboard && npm run build`, com os JSONs já em `dashboard/public/data/`.
+> Os JSONs do pipeline já estão commitados em `dashboard/public/data/`.
+> O Cloudflare só precisa rodar o build do Next.js — não precisa do Python nem do dataset.
 
-### Recomendação para CI/CD
-
-Commite os JSONs de `data/output/` e `dashboard/public/data/` no repositório. O Cloudflare Pages então só precisa rodar o build do Next.js:
-
-```
-Build command: cd dashboard && npm run build
-Build output directory: dashboard/out
-```
-
-### Configuração de DNS
-
-No painel de DNS da Cloudflare, adicione:
+**DNS (subdomain):**
 
 | Tipo | Nome | Conteúdo |
 |------|------|----------|
-| CNAME | `ecommerce` | `[seu-projeto].pages.dev` |
-
-Acesso via `https://ecommerce.seudominio.com` após propagação.
+| CNAME | `ecommerce` | `100k-pedido.pages.dev` |
 
 ---
 
