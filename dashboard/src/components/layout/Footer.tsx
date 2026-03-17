@@ -7,7 +7,7 @@ const Footer = () => (
       <p>
         Por{" "}
         <a
-          href="https://www.linkedin.com/in/galvza"
+          href="https://www.linkedin.com/in/biel-als/"
           target="_blank"
           rel="noopener noreferrer"
           className="underline hover:text-foreground transition-colors"
