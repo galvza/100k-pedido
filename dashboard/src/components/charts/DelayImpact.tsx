@@ -16,6 +16,7 @@ import { loadChapterData } from "@/lib/data";
 import type { ReviewsAtraso } from "@/types";
 import { formatNumber } from "@/lib/formatters";
 import { CHART_CONFIG, MUTED_COLOR } from "@/lib/constants";
+import { useIsMobile } from "@/lib/hooks";
 
 function getBarColor(score: number): string {
   if (score >= 4.0) return "#059669";
@@ -46,6 +47,7 @@ function CustomTooltip({ active, payload }: TooltipProps) {
  */
 export default function DelayImpact() {
   const [data, setData] = useState<ReviewsAtraso[] | null>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     loadChapterData<ReviewsAtraso[]>("06_reviews_atraso.json").then(setData);
@@ -63,7 +65,10 @@ export default function DelayImpact() {
   return (
     <div data-testid="delay-impact" className="mt-4">
       <ResponsiveContainer width="100%" height={208}>
-        <BarChart data={data} margin={CHART_CONFIG.marginWithAxis}>
+        <BarChart
+          data={data}
+          margin={isMobile ? { top: 8, right: 16, bottom: 40, left: 8 } : CHART_CONFIG.marginWithAxis}
+        >
           <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" vertical={false} />
           <XAxis
             dataKey="faixa_atraso"

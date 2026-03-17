@@ -15,6 +15,7 @@ import { loadChapterData } from "@/lib/data";
 import type { SazonalidadeHoraria } from "@/types";
 import { formatNumber } from "@/lib/formatters";
 import { CHART_CONFIG, CHART_COLORS, MUTED_COLOR } from "@/lib/constants";
+import { useIsMobile } from "@/lib/hooks";
 
 interface TooltipProps {
   active?: boolean;
@@ -40,6 +41,7 @@ function CustomTooltip({ active, payload, label }: TooltipProps) {
  */
 export default function HourlyChart() {
   const [data, setData] = useState<SazonalidadeHoraria[] | null>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     loadChapterData<SazonalidadeHoraria[]>(
@@ -64,7 +66,10 @@ export default function HourlyChart() {
   return (
     <div data-testid="hourly-chart" className="mt-4">
       <ResponsiveContainer width="100%" height={208}>
-        <AreaChart data={data} margin={CHART_CONFIG.marginWithAxis}>
+        <AreaChart
+          data={data}
+          margin={isMobile ? { top: 8, right: 16, bottom: 40, left: 8 } : CHART_CONFIG.marginWithAxis}
+        >
           <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" vertical={false} />
           <XAxis
             dataKey="hora"

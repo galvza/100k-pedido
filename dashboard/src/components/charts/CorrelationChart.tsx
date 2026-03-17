@@ -74,7 +74,7 @@ export default function CorrelationChart() {
   return (
     <div data-testid="correlation-chart" className="mt-4">
       <ResponsiveContainer width="100%" height={isMobile ? 240 : 280}>
-        <ScatterChart margin={{ ...CHART_CONFIG.marginWithAxis, left: isMobile ? 40 : 56 }}>
+        <ScatterChart margin={{ ...CHART_CONFIG.marginWithAxis, left: isMobile ? 8 : 56, right: isMobile ? 16 : 24 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
           <XAxis
             dataKey="x"

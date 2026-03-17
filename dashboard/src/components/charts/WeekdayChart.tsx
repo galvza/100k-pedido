@@ -16,6 +16,7 @@ import { loadChapterData } from "@/lib/data";
 import type { SazonalidadeSemanal } from "@/types";
 import { formatNumber } from "@/lib/formatters";
 import { CHART_CONFIG, CHART_COLORS, MUTED_COLOR } from "@/lib/constants";
+import { useIsMobile } from "@/lib/hooks";
 
 const LABELS: Record<number, string> = {
   1: "Seg",
@@ -52,6 +53,7 @@ function CustomTooltip({ active, payload, label }: TooltipProps) {
  */
 export default function WeekdayChart() {
   const [data, setData] = useState<SazonalidadeSemanal[] | null>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     loadChapterData<SazonalidadeSemanal[]>(
@@ -75,7 +77,10 @@ export default function WeekdayChart() {
   return (
     <div data-testid="weekday-chart" className="mt-4">
       <ResponsiveContainer width="100%" height={208}>
-        <BarChart data={enriched} margin={CHART_CONFIG.marginWithAxis}>
+        <BarChart
+          data={enriched}
+          margin={isMobile ? { top: 8, right: 16, bottom: 40, left: 8 } : CHART_CONFIG.marginWithAxis}
+        >
           <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" vertical={false} />
           <XAxis
             dataKey="label"
