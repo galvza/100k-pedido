@@ -83,7 +83,9 @@ class TestDatabaseCreation:
 
 # T003 — Tabelas criadas
 class TestTableCreation:
-    def test_all_nine_tables_exist(self, ingested_db: duckdb.DuckDBPyConnection) -> None:
+    def test_all_nine_tables_exist(
+        self, ingested_db: duckdb.DuckDBPyConnection
+    ) -> None:
         """T003: DuckDB contém exatamente as 9 tabelas esperadas."""
         result = ingested_db.execute(
             "SELECT table_name FROM information_schema.tables WHERE table_schema = 'main'"
@@ -91,7 +93,9 @@ class TestTableCreation:
         tables = {row[0] for row in result}
         assert tables == EXPECTED_TABLES
 
-    def test_table_names_match_spec(self, ingested_db: duckdb.DuckDBPyConnection) -> None:
+    def test_table_names_match_spec(
+        self, ingested_db: duckdb.DuckDBPyConnection
+    ) -> None:
         """T004: Nomes das tabelas seguem convenção (sem prefixo olist_, sem _dataset)."""
         result = ingested_db.execute(
             "SELECT table_name FROM information_schema.tables WHERE table_schema = 'main'"
@@ -104,15 +108,17 @@ class TestTableCreation:
 
 # T005 — Contagem de linhas
 class TestRowCounts:
-    def test_row_counts_match_fixtures(self, ingested_db: duckdb.DuckDBPyConnection) -> None:
+    def test_row_counts_match_fixtures(
+        self, ingested_db: duckdb.DuckDBPyConnection
+    ) -> None:
         """T005: Contagem de linhas confere com CSVs de fixture."""
         for table_name, expected in EXPECTED_ROW_COUNTS.items():
             actual = ingested_db.execute(
                 f"SELECT COUNT(*) FROM {table_name}"
             ).fetchone()[0]
-            assert actual == expected, (
-                f"Tabela {table_name}: esperado {expected}, obteve {actual}"
-            )
+            assert (
+                actual == expected
+            ), f"Tabela {table_name}: esperado {expected}, obteve {actual}"
 
 
 # T006 — Tipos de colunas
@@ -131,9 +137,9 @@ class TestColumnTypes:
             col_types = {row[0]: row[1] for row in result}
             for col in columns:
                 assert col in col_types, f"Coluna {col} não encontrada em {table_name}"
-                assert col_types[col] == "TIMESTAMP", (
-                    f"{table_name}.{col}: esperado TIMESTAMP, obteve {col_types[col]}"
-                )
+                assert (
+                    col_types[col] == "TIMESTAMP"
+                ), f"{table_name}.{col}: esperado TIMESTAMP, obteve {col_types[col]}"
 
     def test_varchar_columns_are_varchar(
         self, ingested_db: duckdb.DuckDBPyConnection
@@ -154,9 +160,9 @@ class TestColumnTypes:
                 WHERE table_name = '{table_name}' AND column_name = '{col_name}'
             """).fetchone()
             assert result is not None, f"Coluna {table_name}.{col_name} não encontrada"
-            assert result[0] == "VARCHAR", (
-                f"{table_name}.{col_name}: esperado VARCHAR, obteve {result[0]}"
-            )
+            assert (
+                result[0] == "VARCHAR"
+            ), f"{table_name}.{col_name}: esperado VARCHAR, obteve {result[0]}"
 
     def test_decimal_columns(self, ingested_db: duckdb.DuckDBPyConnection) -> None:
         """T008: Colunas monetárias são DECIMAL."""
@@ -172,9 +178,9 @@ class TestColumnTypes:
                 WHERE table_name = '{table_name}' AND column_name = '{col_name}'
             """).fetchone()
             assert result is not None
-            assert result[0] == "DECIMAL(10,2)", (
-                f"{table_name}.{col_name}: esperado DECIMAL(10,2), obteve {result[0]}"
-            )
+            assert (
+                result[0] == "DECIMAL(10,2)"
+            ), f"{table_name}.{col_name}: esperado DECIMAL(10,2), obteve {result[0]}"
 
 
 # T009 — Validação de CSVs

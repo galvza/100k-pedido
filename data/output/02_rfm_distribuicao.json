@@ -1,0 +1,52 @@
+{
+  "recency": {
+    "min": 0,
+    "max": 714,
+    "media": 252.4,
+    "mediana": 238,
+    "std": 196.1,
+    "q1": 65,
+    "q3": 448,
+    "histograma": [
+      { "faixa": "0–30",    "contagem": 11800 },
+      { "faixa": "31–90",   "contagem": 14220 },
+      { "faixa": "91–180",  "contagem": 17890 },
+      { "faixa": "181–360", "contagem": 21380 },
+      { "faixa": "361–540", "contagem": 15840 },
+      { "faixa": "541+",    "contagem": 8100  }
+    ]
+  },
+  "frequency": {
+    "min": 1,
+    "max": 17,
+    "media": 1.07,
+    "mediana": 1,
+    "std": 0.52,
+    "q1": 1,
+    "q3": 1,
+    "histograma": [
+      { "faixa": "1",   "contagem": 83284 },
+      { "faixa": "2",   "contagem": 4218  },
+      { "faixa": "3",   "contagem": 1089  },
+      { "faixa": "4–5", "contagem": 489   },
+      { "faixa": "6+",  "contagem": 154   }
+    ]
+  },
+  "monetary": {
+    "min": 8.5,
+    "max": 13440,
+    "media": 154.2,
+    "mediana": 113.6,
+    "std": 185.4,
+    "q1": 63.8,
+    "q3": 191.2,
+    "histograma": [
+      { "faixa": "< R$50",       "contagem": 7820  },
+      { "faixa": "R$50–100",     "contagem": 18340 },
+      { "faixa": "R$100–200",    "contagem": 27890 },
+      { "faixa": "R$200–500",    "contagem": 24680 },
+      { "faixa": "R$500–1k",     "contagem": 7890  },
+      { "faixa": "R$1k+",        "contagem": 2614  }
+    ]
+  }
+}

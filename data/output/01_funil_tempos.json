@@ -1,0 +1,8 @@
+[
+  { "faixa": "0–7 dias",   "contagem": 21847, "media_dias_na_faixa": 4.82,  "min_dias": 0,  "max_dias": 7   },
+  { "faixa": "8–14 dias",  "contagem": 38134, "media_dias_na_faixa": 10.91, "min_dias": 8,  "max_dias": 14  },
+  { "faixa": "15–21 dias", "contagem": 22563, "media_dias_na_faixa": 17.84, "min_dias": 15, "max_dias": 21  },
+  { "faixa": "22–30 dias", "contagem": 8912,  "media_dias_na_faixa": 25.43, "min_dias": 22, "max_dias": 30  },
+  { "faixa": "31–60 dias", "contagem": 4122,  "media_dias_na_faixa": 42.17, "min_dias": 31, "max_dias": 60  },
+  { "faixa": "> 60 dias",  "contagem": 900,   "media_dias_na_faixa": 87.32, "min_dias": 61, "max_dias": 210 }
+]

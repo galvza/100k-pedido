@@ -111,9 +111,7 @@ def t_test_independente(
     mean_diff = float(a.mean() - b.mean())
     n_a, n_b = len(a), len(b)
     var_a, var_b = float(a.var(ddof=1)), float(b.var(ddof=1))
-    pooled_std = math.sqrt(
-        ((n_a - 1) * var_a + (n_b - 1) * var_b) / (n_a + n_b - 2)
-    )
+    pooled_std = math.sqrt(((n_a - 1) * var_a + (n_b - 1) * var_b) / (n_a + n_b - 2))
     cohens_d = mean_diff / pooled_std if pooled_std > 0 else 0.0
 
     return {
@@ -177,7 +175,9 @@ def resultado_formatado(teste: dict, hipotese: str) -> dict:
             efeito = "medio"
         else:
             efeito = "grande"
-        conclusao += f" Tamanho do efeito (Cohen's d): {teste['cohens_d']:.4f} ({efeito})."
+        conclusao += (
+            f" Tamanho do efeito (Cohen's d): {teste['cohens_d']:.4f} ({efeito})."
+        )
     elif "tamanho_efeito" in teste and teste["tamanho_efeito"] is not None:
         r = abs(teste["tamanho_efeito"])
         if r < 0.1:
@@ -188,7 +188,9 @@ def resultado_formatado(teste: dict, hipotese: str) -> dict:
             efeito = "medio"
         else:
             efeito = "grande"
-        conclusao += f" Tamanho do efeito (r): {teste['tamanho_efeito']:.4f} ({efeito})."
+        conclusao += (
+            f" Tamanho do efeito (r): {teste['tamanho_efeito']:.4f} ({efeito})."
+        )
 
     resultado["conclusao"] = conclusao
 

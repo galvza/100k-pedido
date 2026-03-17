@@ -12,10 +12,10 @@ from pipeline.analyze.hipoteses import (
     t_test_independente,
 )
 
-
 # =========================================================
 # Fixtures de dados para testes estatísticos
 # =========================================================
+
 
 @pytest.fixture
 def grupos_diferentes() -> tuple[pd.Series, pd.Series]:
@@ -58,14 +58,22 @@ def grupos_identicos() -> tuple[pd.Series, pd.Series]:
 # T033 — Mann-Whitney U test
 # =========================================================
 
+
 class TestMannWhitney:
     def test_returns_required_keys(self, grupos_diferentes: tuple) -> None:
         """T033: Resultado contém todas as chaves esperadas."""
         a, b = grupos_diferentes
         result = mann_whitney_test(a, b)
         expected_keys = {
-            "teste_usado", "u_statistic", "p_value", "significativo",
-            "tamanho_efeito", "n_a", "n_b", "alpha", "mensagem",
+            "teste_usado",
+            "u_statistic",
+            "p_value",
+            "significativo",
+            "tamanho_efeito",
+            "n_a",
+            "n_b",
+            "alpha",
+            "mensagem",
         }
         assert set(result.keys()) == expected_keys
 
@@ -82,9 +90,7 @@ class TestMannWhitney:
         assert result["significativo"] is True
         assert result["p_value"] < 0.05
 
-    def test_no_significance_for_same_distribution(
-        self, grupos_iguais: tuple
-    ) -> None:
+    def test_no_significance_for_same_distribution(self, grupos_iguais: tuple) -> None:
         """Não detecta diferença significativa para mesma distribuição."""
         a, b = grupos_iguais
         result = mann_whitney_test(a, b)
@@ -137,14 +143,22 @@ class TestMannWhitney:
 # T034 — t-test independente
 # =========================================================
 
+
 class TestTTest:
     def test_returns_required_keys(self, grupos_diferentes: tuple) -> None:
         """T034: Resultado contém todas as chaves esperadas."""
         a, b = grupos_diferentes
         result = t_test_independente(a, b)
         expected_keys = {
-            "teste_usado", "t_statistic", "p_value", "significativo",
-            "cohens_d", "n_a", "n_b", "alpha", "mensagem",
+            "teste_usado",
+            "t_statistic",
+            "p_value",
+            "significativo",
+            "cohens_d",
+            "n_a",
+            "n_b",
+            "alpha",
+            "mensagem",
         }
         assert set(result.keys()) == expected_keys
 
@@ -160,9 +174,7 @@ class TestTTest:
         result = t_test_independente(a, b)
         assert result["significativo"] is True
 
-    def test_no_significance_for_same_distribution(
-        self, grupos_iguais: tuple
-    ) -> None:
+    def test_no_significance_for_same_distribution(self, grupos_iguais: tuple) -> None:
         """Não detecta diferença para mesma distribuição."""
         a, b = grupos_iguais
         result = t_test_independente(a, b)
@@ -186,9 +198,7 @@ class TestTTest:
         result = t_test_independente(a, b)
         assert abs(result["cohens_d"]) > 0.8
 
-    def test_cohens_d_small_for_same_distribution(
-        self, grupos_iguais: tuple
-    ) -> None:
+    def test_cohens_d_small_for_same_distribution(self, grupos_iguais: tuple) -> None:
         """Cohen's d pequeno para mesma distribuição."""
         a, b = grupos_iguais
         result = t_test_independente(a, b)
@@ -220,6 +230,7 @@ class TestTTest:
 # =========================================================
 # T035-T037 — resultado_formatado
 # =========================================================
+
 
 class TestResultadoFormatado:
     def test_adds_hipotese(self, grupos_diferentes: tuple) -> None:
@@ -321,26 +332,32 @@ def df_rfm_sample() -> pd.DataFrame:
     """DataFrame RFM sintético com 3 clusters claros."""
     np.random.seed(42)
     # Cluster 0: recentes, frequentes, alto valor
-    c0 = pd.DataFrame({
-        "customer_unique_id": [f"champ_{i}" for i in range(30)],
-        "recency": np.random.randint(1, 30, 30),
-        "frequency": np.random.randint(3, 8, 30),
-        "monetary": np.random.uniform(500, 1000, 30).round(2),
-    })
+    c0 = pd.DataFrame(
+        {
+            "customer_unique_id": [f"champ_{i}" for i in range(30)],
+            "recency": np.random.randint(1, 30, 30),
+            "frequency": np.random.randint(3, 8, 30),
+            "monetary": np.random.uniform(500, 1000, 30).round(2),
+        }
+    )
     # Cluster 1: intermediários
-    c1 = pd.DataFrame({
-        "customer_unique_id": [f"mid_{i}" for i in range(40)],
-        "recency": np.random.randint(60, 150, 40),
-        "frequency": np.random.randint(1, 3, 40),
-        "monetary": np.random.uniform(100, 400, 40).round(2),
-    })
+    c1 = pd.DataFrame(
+        {
+            "customer_unique_id": [f"mid_{i}" for i in range(40)],
+            "recency": np.random.randint(60, 150, 40),
+            "frequency": np.random.randint(1, 3, 40),
+            "monetary": np.random.uniform(100, 400, 40).round(2),
+        }
+    )
     # Cluster 2: inativos, baixo valor
-    c2 = pd.DataFrame({
-        "customer_unique_id": [f"lost_{i}" for i in range(30)],
-        "recency": np.random.randint(200, 400, 30),
-        "frequency": np.random.randint(1, 2, 30),
-        "monetary": np.random.uniform(20, 100, 30).round(2),
-    })
+    c2 = pd.DataFrame(
+        {
+            "customer_unique_id": [f"lost_{i}" for i in range(30)],
+            "recency": np.random.randint(200, 400, 30),
+            "frequency": np.random.randint(1, 2, 30),
+            "monetary": np.random.uniform(20, 100, 30).round(2),
+        }
+    )
     return pd.concat([c0, c1, c2], ignore_index=True)
 
 
@@ -365,6 +382,7 @@ def X_normalized(df_rfm_sample: pd.DataFrame) -> np.ndarray:
 # T038 — normalizar_features
 # =========================================================
 
+
 class TestNormalizarFeatures:
     def test_mean_near_zero(self, df_rfm_sample: pd.DataFrame) -> None:
         """T038: Média das features normalizadas é ~0."""
@@ -382,7 +400,9 @@ class TestNormalizarFeatures:
 
     def test_returns_scaler(self, df_rfm_sample: pd.DataFrame) -> None:
         """Retorna o scaler para uso posterior."""
-        X, scaler = normalizar_features(df_rfm_sample, ["recency", "frequency", "monetary"])
+        X, scaler = normalizar_features(
+            df_rfm_sample, ["recency", "frequency", "monetary"]
+        )
         assert hasattr(scaler, "transform")
         assert hasattr(scaler, "inverse_transform")
 
@@ -395,6 +415,7 @@ class TestNormalizarFeatures:
 # =========================================================
 # T039 — elbow_method
 # =========================================================
+
 
 class TestElbowMethod:
     def test_returns_list_of_dicts(self, X_normalized: np.ndarray) -> None:
@@ -434,6 +455,7 @@ class TestElbowMethod:
 # T040 — silhouette_scores
 # =========================================================
 
+
 class TestSilhouetteScores:
     def test_returns_list_of_dicts(self, X_normalized: np.ndarray) -> None:
         """T040: Retorna lista de dicts com k e silhouette."""
@@ -447,13 +469,11 @@ class TestSilhouetteScores:
         """Silhouette scores estão entre -1 e 1."""
         results = silhouette_scores(X_normalized, k_range=range(2, 6))
         for r in results:
-            assert -1.0 <= r["silhouette"] <= 1.0, (
-                f"k={r['k']}: silhouette={r['silhouette']}"
-            )
+            assert (
+                -1.0 <= r["silhouette"] <= 1.0
+            ), f"k={r['k']}: silhouette={r['silhouette']}"
 
-    def test_positive_for_well_separated_data(
-        self, X_normalized: np.ndarray
-    ) -> None:
+    def test_positive_for_well_separated_data(self, X_normalized: np.ndarray) -> None:
         """Silhouette é positivo para dados com clusters claros."""
         results = silhouette_scores(X_normalized, k_range=range(2, 6))
         # Pelo menos k=3 deve ter silhouette > 0 (3 clusters claros)
@@ -464,6 +484,7 @@ class TestSilhouetteScores:
 # =========================================================
 # T041 — rodar_kmeans
 # =========================================================
+
 
 class TestRodarKmeans:
     def test_returns_required_keys(self, X_normalized: np.ndarray) -> None:
@@ -498,19 +519,24 @@ class TestRodarKmeans:
 # T042-T043 — pipeline_clustering
 # =========================================================
 
+
 class TestPipelineClustering:
     def test_returns_required_keys(self, df_rfm_sample: pd.DataFrame) -> None:
         """T042: pipeline_clustering retorna todas as chaves esperadas."""
         result = pipeline_clustering(df_rfm_sample, k_range=range(2, 6))
         expected = {
-            "df_resultado", "elbow", "silhouette", "kmeans",
-            "k_otimo", "scaler", "n_original", "n_usado",
+            "df_resultado",
+            "elbow",
+            "silhouette",
+            "kmeans",
+            "k_otimo",
+            "scaler",
+            "n_original",
+            "n_usado",
         }
         assert set(result.keys()) == expected
 
-    def test_df_resultado_has_cluster_column(
-        self, df_rfm_sample: pd.DataFrame
-    ) -> None:
+    def test_df_resultado_has_cluster_column(self, df_rfm_sample: pd.DataFrame) -> None:
         """DataFrame resultado tem coluna 'cluster'."""
         result = pipeline_clustering(df_rfm_sample, k_range=range(2, 6))
         assert "cluster" in result["df_resultado"].columns
@@ -543,19 +569,19 @@ class TestPipelineClustering:
 
     def test_insufficient_data(self) -> None:
         """DataFrame com < 2 linhas retorna resultado vazio."""
-        df_tiny = pd.DataFrame({
-            "recency": [10],
-            "frequency": [1],
-            "monetary": [50.0],
-        })
+        df_tiny = pd.DataFrame(
+            {
+                "recency": [10],
+                "frequency": [1],
+                "monetary": [50.0],
+            }
+        )
         result = pipeline_clustering(df_tiny)
         assert result["kmeans"] is None
         assert result["k_otimo"] is None
         assert result["elbow"] == []
 
-    def test_finds_3_clusters_in_clear_data(
-        self, df_rfm_sample: pd.DataFrame
-    ) -> None:
+    def test_finds_3_clusters_in_clear_data(self, df_rfm_sample: pd.DataFrame) -> None:
         """Encontra ~3 clusters em dados com 3 grupos claros."""
         result = pipeline_clustering(df_rfm_sample, k_range=range(2, 8))
         # k_otimo deve estar perto de 3
@@ -610,6 +636,7 @@ def dados_split(df_features: pd.DataFrame) -> tuple:
 # T044 — criar_features
 # =========================================================
 
+
 class TestCriarFeatures:
     def test_only_delivered_orders(self, df_features: pd.DataFrame) -> None:
         """T044: Resultado contém apenas pedidos delivered."""
@@ -624,9 +651,14 @@ class TestCriarFeatures:
     def test_required_columns_present(self, df_features: pd.DataFrame) -> None:
         """DataFrame tem todas as colunas esperadas."""
         expected = {
-            "order_id", "peso_g", "frete", "preco",
-            "estado_cliente", "distancia_estimada_dias",
-            "volume_cm3", "atraso",
+            "order_id",
+            "peso_g",
+            "frete",
+            "preco",
+            "estado_cliente",
+            "distancia_estimada_dias",
+            "volume_cm3",
+            "atraso",
         }
         assert expected == set(df_features.columns)
 
@@ -649,6 +681,7 @@ class TestCriarFeatures:
 # =========================================================
 # T045 — preparar_dados
 # =========================================================
+
 
 class TestPrepararDados:
     def test_split_sizes(self, dados_split: tuple) -> None:
@@ -693,6 +726,7 @@ class TestPrepararDados:
 # T046-T047 — treinar_modelo
 # =========================================================
 
+
 class TestTreinarModelo:
     def test_logistic_regression(self, dados_split: tuple) -> None:
         """T046: Treina LogisticRegression com class_weight balanced."""
@@ -730,6 +764,7 @@ class TestTreinarModelo:
 # T048 — avaliar_modelo
 # =========================================================
 
+
 class TestAvaliarModelo:
     def test_returns_required_keys(self, dados_split: tuple) -> None:
         """T048: Métricas incluem accuracy, precision, recall, F1, AUC-ROC."""
@@ -737,8 +772,13 @@ class TestAvaliarModelo:
         modelo = treinar_modelo(X_train, y_train, modelo="logistic")
         metricas = avaliar_modelo(modelo, X_test, y_test)
         expected_keys = {
-            "accuracy", "precision", "recall", "f1",
-            "auc_roc", "confusion_matrix", "classification_report",
+            "accuracy",
+            "precision",
+            "recall",
+            "f1",
+            "auc_roc",
+            "confusion_matrix",
+            "classification_report",
         }
         assert set(metricas.keys()) == expected_keys
 
@@ -782,8 +822,13 @@ class TestPipelinePredicao:
         """T049: pipeline_predicao retorna todas as chaves esperadas."""
         result = pipeline_predicao(db_path_fixture)
         expected = {
-            "metricas_logistic", "metricas_rf", "feature_importances",
-            "feature_names", "n_original", "n_usado", "proporcao_atraso",
+            "metricas_logistic",
+            "metricas_rf",
+            "feature_importances",
+            "feature_names",
+            "n_original",
+            "n_usado",
+            "proporcao_atraso",
         }
         assert set(result.keys()) == expected
 

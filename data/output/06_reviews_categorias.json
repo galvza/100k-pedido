@@ -1,0 +1,19 @@
+[
+  {"categoria":"livros_tecnicos","total_reviews":234,"score_medio":4.53,"reviews_positivas":198,"reviews_negativas":8},
+  {"categoria":"instrumentos_musicais","total_reviews":189,"score_medio":4.51,"reviews_positivas":163,"reviews_negativas":7},
+  {"categoria":"flores","total_reviews":167,"score_medio":4.44,"reviews_positivas":143,"reviews_negativas":6},
+  {"categoria":"artes","total_reviews":312,"score_medio":4.38,"reviews_positivas":264,"reviews_negativas":11},
+  {"categoria":"cds_dvds_musicais","total_reviews":198,"score_medio":4.35,"reviews_positivas":167,"reviews_negativas":9},
+  {"categoria":"beleza_saude","total_reviews":9671,"score_medio":4.10,"reviews_positivas":7983,"reviews_negativas":534},
+  {"categoria":"brinquedos","total_reviews":7432,"score_medio":4.09,"reviews_positivas":6108,"reviews_negativas":412},
+  {"categoria":"cama_mesa_banho","total_reviews":11458,"score_medio":4.08,"reviews_positivas":9345,"reviews_negativas":645},
+  {"categoria":"esporte_lazer","total_reviews":8641,"score_medio":4.07,"reviews_positivas":7034,"reviews_negativas":489},
+  {"categoria":"informatica_acessorios","total_reviews":10238,"score_medio":4.03,"reviews_positivas":8234,"reviews_negativas":589},
+  {"categoria":"relogios_presentes","total_reviews":5432,"score_medio":3.97,"reviews_positivas":4321,"reviews_negativas":312},
+  {"categoria":"ferramentas_jardim","total_reviews":4213,"score_medio":3.94,"reviews_positivas":3345,"reviews_negativas":245},
+  {"categoria":"tablets_impressao_imagem","total_reviews":1234,"score_medio":2.90,"reviews_positivas":654,"reviews_negativas":312},
+  {"categoria":"climatizacao","total_reviews":456,"score_medio":2.85,"reviews_positivas":198,"reviews_negativas":134},
+  {"categoria":"pc_gamer","total_reviews":567,"score_medio":2.79,"reviews_positivas":234,"reviews_negativas":178},
+  {"categoria":"fraldas_higiene","total_reviews":234,"score_medio":2.58,"reviews_positivas":78,"reviews_negativas":98},
+  {"categoria":"seguranca_e_servicos","total_reviews":87,"score_medio":2.50,"reviews_positivas":23,"reviews_negativas":41}
+]

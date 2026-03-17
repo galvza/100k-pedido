@@ -110,12 +110,14 @@ def criar_features(db_path: str) -> pd.DataFrame:
     )
 
     # Renomear pra nomes limpos
-    df = df.rename(columns={
-        "product_weight_g": "peso_g",
-        "freight_value": "frete",
-        "price": "preco",
-        "customer_state": "estado_cliente",
-    })
+    df = df.rename(
+        columns={
+            "product_weight_g": "peso_g",
+            "freight_value": "frete",
+            "price": "preco",
+            "customer_state": "estado_cliente",
+        }
+    )
 
     # Selecionar colunas finais
     colunas_finais = [
@@ -181,7 +183,8 @@ def preparar_dados(
 
     # Split estratificado
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y,
+        X,
+        y,
         test_size=test_size,
         random_state=random_state,
         stratify=y,
@@ -276,9 +279,7 @@ def avaliar_modelo(
     report = classification_report(y_test, y_pred, zero_division=0)
 
     if acc < 0.5:
-        logger.warning(
-            "Modelo não supera baseline: accuracy=%.4f < 0.5", acc
-        )
+        logger.warning("Modelo não supera baseline: accuracy=%.4f < 0.5", acc)
 
     return {
         "accuracy": acc,

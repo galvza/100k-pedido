@@ -151,9 +151,7 @@ def sample_dataframes(sample_db: duckdb.DuckDBPyConnection) -> dict[str, pd.Data
     """
     dfs = {}
     for table_name in TABLES:
-        dfs[table_name] = sample_db.execute(
-            f"SELECT * FROM {table_name}"
-        ).fetchdf()
+        dfs[table_name] = sample_db.execute(f"SELECT * FROM {table_name}").fetchdf()
     return dfs
 
 

@@ -20,10 +20,10 @@ from pipeline.export import (
 )
 from pipeline.queries import run_query
 
-
 # =========================================================
 # Fixtures
 # =========================================================
+
 
 @pytest.fixture(scope="session")
 def all_query_results(
@@ -104,6 +104,7 @@ def exported_files(exported_dir: Path) -> dict[str, Path]:
 # T051 — _clean_value
 # =========================================================
 
+
 class TestCleanValue:
     def test_nan_becomes_none(self) -> None:
         """T051: NaN vira None (→ null no JSON)."""
@@ -152,6 +153,7 @@ class TestCleanValue:
 # T052 — _df_to_records
 # =========================================================
 
+
 class TestDfToRecords:
     def test_basic_conversion(self) -> None:
         """T052: DataFrame básico vira lista de dicts."""
@@ -168,10 +170,12 @@ class TestDfToRecords:
 
     def test_timestamps_converted(self) -> None:
         """Timestamps são convertidos pra ISO string."""
-        df = pd.DataFrame({
-            "data": pd.to_datetime(["2018-01-15", "2018-02-20"]),
-            "valor": [1, 2],
-        })
+        df = pd.DataFrame(
+            {
+                "data": pd.to_datetime(["2018-01-15", "2018-02-20"]),
+                "valor": [1, 2],
+            }
+        )
         records = _df_to_records(df)
         assert records[0]["data"] == "2018-01-15"
 
@@ -184,6 +188,7 @@ class TestDfToRecords:
 # =========================================================
 # T053 — _round_fields
 # =========================================================
+
 
 class TestRoundFields:
     def test_monetary_rounding(self) -> None:
@@ -214,6 +219,7 @@ class TestRoundFields:
 # =========================================================
 # T054 — export_all gera todos os JSONs
 # =========================================================
+
 
 class TestExportAll:
     def test_returns_list_of_filenames(
@@ -250,6 +256,7 @@ class TestExportAll:
 # T055 — Todos os JSONs são válidos
 # =========================================================
 
+
 class TestJsonValidity:
     def test_all_jsons_are_valid(self, exported_dir: Path) -> None:
         """T055: Todos os JSONs são parseáveis com json.loads."""
@@ -272,9 +279,9 @@ class TestJsonValidity:
         """T056: Nenhum JSON excede 500KB."""
         for json_file in exported_dir.glob("*.json"):
             size_kb = json_file.stat().st_size / 1024
-            assert size_kb <= 500, (
-                f"{json_file.name} tem {size_kb:.1f} KB (limite: 500 KB)"
-            )
+            assert (
+                size_kb <= 500
+            ), f"{json_file.name} tem {size_kb:.1f} KB (limite: 500 KB)"
 
 
 def _assert_no_nan_strings(data: object, context: str) -> None:
@@ -292,6 +299,7 @@ def _assert_no_nan_strings(data: object, context: str) -> None:
 # =========================================================
 # T057 — Cap.1 Funil de Vendas
 # =========================================================
+
 
 class TestExportFunil:
     def test_funil_status_structure(self, exported_dir: Path) -> None:
@@ -330,6 +338,7 @@ class TestExportFunil:
 # T058 — Cap.2 RFM
 # =========================================================
 
+
 class TestExportRfm:
     def test_rfm_distribuicao_structure(self, exported_dir: Path) -> None:
         """T058: 02_rfm_distribuicao.json tem 3 dimensões."""
@@ -364,6 +373,7 @@ class TestExportRfm:
 # =========================================================
 # T059 — Cap.3 Cohort
 # =========================================================
+
 
 class TestExportCohort:
     def test_cohort_heatmap_structure(self, exported_dir: Path) -> None:
@@ -414,6 +424,7 @@ class TestExportCohort:
 # =========================================================
 # T060 — Cap.4 Geo, Cap.5 Sazonalidade, Cap.6 Reviews
 # =========================================================
+
 
 class TestExportGeo:
     def test_geo_estados_structure(self, exported_dir: Path) -> None:
@@ -518,6 +529,7 @@ class TestExportReviews:
 # T082-T084 — Arredondamento e qualidade dos dados
 # =========================================================
 
+
 class TestDataQuality:
     def test_monetary_values_max_2_decimals(self, exported_dir: Path) -> None:
         """T082: Valores monetários têm no máximo 2 casas decimais."""
@@ -536,10 +548,12 @@ class TestDataQuality:
                     for field in fields:
                         val = row.get(field)
                         if val is not None and isinstance(val, float):
-                            decimal_str = str(val).split(".")[-1] if "." in str(val) else ""
-                            assert len(decimal_str) <= 2, (
-                                f"{filename}.{field}={val} tem mais de 2 casas decimais"
+                            decimal_str = (
+                                str(val).split(".")[-1] if "." in str(val) else ""
                             )
+                            assert (
+                                len(decimal_str) <= 2
+                            ), f"{filename}.{field}={val} tem mais de 2 casas decimais"
 
     def test_dates_are_iso_strings(self, exported_dir: Path) -> None:
         """T083: Datas são strings ISO (YYYY-MM ou YYYY-MM-DD)."""
@@ -568,8 +582,10 @@ class TestDataQuality:
 # Helpers
 # =========================================================
 
+
 def _load_json(path: Path) -> Any:
     """Carrega e retorna conteúdo de um arquivo JSON."""
     from typing import Any
+
     content = path.read_text(encoding="utf-8")
     return json.loads(content)

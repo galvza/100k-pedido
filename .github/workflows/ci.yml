@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  python:
+    name: Python — lint + testes
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instalar dependências Python
+        run: pip install -r requirements.txt
+
+      - name: Lint — black
+        run: black --check pipeline/ tests/
+
+      - name: Lint — isort
+        run: isort --check pipeline/ tests/
+
+      - name: Testes
+        run: pytest --tb=short
+
+  frontend:
+    name: Frontend — lint + testes + build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar dependências
+        run: cd dashboard && npm ci
+
+      - name: Lint
+        run: cd dashboard && npm run lint
+
+      - name: Typecheck
+        run: cd dashboard && npm run typecheck
+
+      - name: Testes
+        run: cd dashboard && npm test
+
+      - name: Build
+        run: cd dashboard && npm run build

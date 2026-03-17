@@ -1,0 +1,22 @@
+[
+  {"palavra":"recomendo","contagem":8943,"faixa":"positiva"},
+  {"palavra":"ótimo","contagem":7821,"faixa":"positiva"},
+  {"palavra":"chegou","contagem":7234,"faixa":"positiva"},
+  {"palavra":"prazo","contagem":6892,"faixa":"positiva"},
+  {"palavra":"rápido","contagem":6123,"faixa":"positiva"},
+  {"palavra":"produto","contagem":5678,"faixa":"positiva"},
+  {"palavra":"bom","contagem":5234,"faixa":"positiva"},
+  {"palavra":"perfeito","contagem":4567,"faixa":"positiva"},
+  {"palavra":"excelente","contagem":4321,"faixa":"positiva"},
+  {"palavra":"parabéns","contagem":3987,"faixa":"positiva"},
+  {"palavra":"não","contagem":4321,"faixa":"negativa"},
+  {"palavra":"prazo","contagem":3891,"faixa":"negativa"},
+  {"palavra":"chegou","contagem":3456,"faixa":"negativa"},
+  {"palavra":"produto","contagem":2987,"faixa":"negativa"},
+  {"palavra":"péssimo","contagem":2345,"faixa":"negativa"},
+  {"palavra":"errado","contagem":1987,"faixa":"negativa"},
+  {"palavra":"problema","contagem":1876,"faixa":"negativa"},
+  {"palavra":"demora","contagem":1654,"faixa":"negativa"},
+  {"palavra":"nunca","contagem":1432,"faixa":"negativa"},
+  {"palavra":"cancelar","contagem":1234,"faixa":"negativa"}
+]

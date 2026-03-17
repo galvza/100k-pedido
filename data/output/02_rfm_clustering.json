@@ -1,0 +1,29 @@
+{
+  "k_otimo": 4,
+  "n_original": 96461,
+  "n_usado": 89234,
+  "elbow": [
+    { "k": 2, "inertia": 52340 },
+    { "k": 3, "inertia": 38210 },
+    { "k": 4, "inertia": 29870 },
+    { "k": 5, "inertia": 26450 },
+    { "k": 6, "inertia": 24890 },
+    { "k": 7, "inertia": 23210 },
+    { "k": 8, "inertia": 22430 }
+  ],
+  "silhouette": [
+    { "k": 2, "silhouette": 0.42 },
+    { "k": 3, "silhouette": 0.38 },
+    { "k": 4, "silhouette": 0.35 },
+    { "k": 5, "silhouette": 0.32 },
+    { "k": 6, "silhouette": 0.28 },
+    { "k": 7, "silhouette": 0.26 },
+    { "k": 8, "silhouette": 0.24 }
+  ],
+  "cluster_profiles": [
+    { "cluster": 0, "label": "Cluster A — VIP",     "recencia_media": 28,  "frequencia_media": 3.4, "monetario_medio": 695.20, "contagem": 11294 },
+    { "cluster": 1, "label": "Cluster B — Ativos",  "recencia_media": 95,  "frequencia_media": 1.8, "monetario_medio": 218.50, "contagem": 21380 },
+    { "cluster": 2, "label": "Cluster C — Dormentes","recencia_media": 355, "frequencia_media": 1.2, "monetario_medio": 148.30, "contagem": 27890 },
+    { "cluster": 3, "label": "Cluster D — Perdidos", "recencia_media": 548, "frequencia_media": 1.0, "monetario_medio": 82.40,  "contagem": 28670 }
+  ]
+}

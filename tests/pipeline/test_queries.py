@@ -54,9 +54,7 @@ class TestFunilStatus:
         self, df_status: pd.DataFrame, sample_db: duckdb.DuckDBPyConnection
     ) -> None:
         """Soma das contagens por status = total de pedidos na tabela orders."""
-        total_orders = sample_db.execute(
-            "SELECT COUNT(*) FROM orders"
-        ).fetchone()[0]
+        total_orders = sample_db.execute("SELECT COUNT(*) FROM orders").fetchone()[0]
         assert df_status["contagem"].sum() == total_orders
 
     def test_percentages_sum_to_100(self, df_status: pd.DataFrame) -> None:
@@ -79,7 +77,10 @@ class TestFunilConversao:
     def test_columns(self, df_conversao: pd.DataFrame) -> None:
         """T021: DataFrame de conversão tem colunas corretas."""
         assert list(df_conversao.columns) == [
-            "etapa", "pedidos", "taxa_conversao", "tempo_medio_dias",
+            "etapa",
+            "pedidos",
+            "taxa_conversao",
+            "tempo_medio_dias",
         ]
 
     def test_four_stages(self, df_conversao: pd.DataFrame) -> None:
@@ -99,19 +100,15 @@ class TestFunilConversao:
             rate = float(row["taxa_conversao"])
             assert 0.0 <= rate <= 1.0, f"Taxa fora do range: {rate} em {row['etapa']}"
 
-    def test_pedidos_decrease_through_funnel(
-        self, df_conversao: pd.DataFrame
-    ) -> None:
+    def test_pedidos_decrease_through_funnel(self, df_conversao: pd.DataFrame) -> None:
         """Contagem de pedidos diminui ou se mantém ao longo do funil."""
         pedidos = list(df_conversao["pedidos"])
         for i in range(1, len(pedidos)):
-            assert pedidos[i] <= pedidos[i - 1], (
-                f"Etapa {i} ({pedidos[i]}) > etapa {i-1} ({pedidos[i-1]})"
-            )
+            assert (
+                pedidos[i] <= pedidos[i - 1]
+            ), f"Etapa {i} ({pedidos[i]}) > etapa {i-1} ({pedidos[i-1]})"
 
-    def test_time_means_are_non_negative(
-        self, df_conversao: pd.DataFrame
-    ) -> None:
+    def test_time_means_are_non_negative(self, df_conversao: pd.DataFrame) -> None:
         """Tempos médios são >= 0."""
         for _, row in df_conversao.iterrows():
             tempo = float(row["tempo_medio_dias"])
@@ -126,7 +123,13 @@ class TestFunilTempos:
 
     def test_columns(self, df_tempos: pd.DataFrame) -> None:
         """T022: DataFrame de tempos tem colunas corretas."""
-        expected_cols = ["faixa", "contagem", "media_dias_na_faixa", "min_dias", "max_dias"]
+        expected_cols = [
+            "faixa",
+            "contagem",
+            "media_dias_na_faixa",
+            "min_dias",
+            "max_dias",
+        ]
         assert list(df_tempos.columns) == expected_cols
 
     def test_has_delivery_time_ranges(self, df_tempos: pd.DataFrame) -> None:
@@ -155,9 +158,9 @@ class TestFunilTempos:
             avg = float(row["media_dias_na_faixa"])
             mn = float(row["min_dias"])
             mx = float(row["max_dias"])
-            assert mn <= avg <= mx, (
-                f"Faixa {row['faixa']}: media {avg} fora de [{mn}, {mx}]"
-            )
+            assert (
+                mn <= avg <= mx
+            ), f"Faixa {row['faixa']}: media {avg} fora de [{mn}, {mx}]"
 
 
 # =========================================================
@@ -178,9 +181,7 @@ VALID_SEGMENTS = {
 
 # T012 — Query RFM executa e retorna resultados corretos
 class TestRfmQuery:
-    def test_rfm_has_two_results(
-        self, sample_db: duckdb.DuckDBPyConnection
-    ) -> None:
+    def test_rfm_has_two_results(self, sample_db: duckdb.DuckDBPyConnection) -> None:
         """T012: RFM gera 2 resultados: rfm_scores e rfm_segmentos."""
         results = run_query("02_rfm.sql", con=sample_db)
         assert set(results.keys()) == {"rfm_scores", "rfm_segmentos"}
@@ -195,8 +196,14 @@ class TestRfmScores:
     def test_columns(self, df_scores: pd.DataFrame) -> None:
         """DataFrame de scores tem todas as colunas esperadas."""
         expected = [
-            "customer_unique_id", "recency", "frequency", "monetary",
-            "r_score", "f_score", "m_score", "segmento",
+            "customer_unique_id",
+            "recency",
+            "frequency",
+            "monetary",
+            "r_score",
+            "f_score",
+            "m_score",
+            "segmento",
         ]
         assert list(df_scores.columns) == expected
 
@@ -234,18 +241,14 @@ class TestRfmScores:
         """Monetary é positivo."""
         assert (df_scores["monetary"] > 0).all()
 
-    def test_every_customer_has_valid_segment(
-        self, df_scores: pd.DataFrame
-    ) -> None:
+    def test_every_customer_has_valid_segment(self, df_scores: pd.DataFrame) -> None:
         """Todo cliente pertence a um segmento válido."""
         segments_found = set(df_scores["segmento"].unique())
-        assert segments_found.issubset(VALID_SEGMENTS), (
-            f"Segmentos inesperados: {segments_found - VALID_SEGMENTS}"
-        )
+        assert segments_found.issubset(
+            VALID_SEGMENTS
+        ), f"Segmentos inesperados: {segments_found - VALID_SEGMENTS}"
 
-    def test_higher_r_score_means_lower_recency(
-        self, df_scores: pd.DataFrame
-    ) -> None:
+    def test_higher_r_score_means_lower_recency(self, df_scores: pd.DataFrame) -> None:
         """Clientes com r_score=5 têm recency menor que r_score=1."""
         r5 = df_scores[df_scores["r_score"] == 5]["recency"].mean()
         r1 = df_scores[df_scores["r_score"] == 1]["recency"].mean()
@@ -265,9 +268,15 @@ class TestRfmSegmentos:
     def test_columns(self, df_segmentos: pd.DataFrame) -> None:
         """T024: DataFrame de segmentos tem colunas corretas."""
         expected = [
-            "segmento", "contagem", "percentual",
-            "recencia_media", "frequencia_media", "monetario_medio",
-            "r_score_medio", "f_score_medio", "m_score_medio",
+            "segmento",
+            "contagem",
+            "percentual",
+            "recencia_media",
+            "frequencia_media",
+            "monetario_medio",
+            "r_score_medio",
+            "f_score_medio",
+            "m_score_medio",
         ]
         assert list(df_segmentos.columns) == expected
 
@@ -291,9 +300,7 @@ class TestRfmSegmentos:
         """Cada segmento aparece exatamente 1 vez."""
         assert df_segmentos["segmento"].is_unique
 
-    def test_champions_have_high_scores(
-        self, df_segmentos: pd.DataFrame
-    ) -> None:
+    def test_champions_have_high_scores(self, df_segmentos: pd.DataFrame) -> None:
         """Champions têm scores médios altos."""
         champs = df_segmentos[df_segmentos["segmento"] == "Champions"]
         if len(champs) > 0:
@@ -310,9 +317,7 @@ class TestRfmSegmentos:
 
 # T013 — Query Cohort executa e retorna resultados corretos
 class TestCohortQuery:
-    def test_cohort_has_two_results(
-        self, sample_db: duckdb.DuckDBPyConnection
-    ) -> None:
+    def test_cohort_has_two_results(self, sample_db: duckdb.DuckDBPyConnection) -> None:
         """T013: Cohort gera 2 resultados: cohort_retencao e cohort_recompra."""
         results = run_query("03_cohort.sql", con=sample_db)
         assert set(results.keys()) == {"cohort_retencao", "cohort_recompra"}
@@ -327,8 +332,11 @@ class TestCohortRetencao:
     def test_columns(self, df_retencao: pd.DataFrame) -> None:
         """T018: DataFrame de retenção tem colunas corretas."""
         expected = [
-            "coorte_mes", "periodo", "clientes_ativos",
-            "tamanho_coorte", "taxa_retencao",
+            "coorte_mes",
+            "periodo",
+            "clientes_ativos",
+            "tamanho_coorte",
+            "taxa_retencao",
         ]
         assert list(df_retencao.columns) == expected
 
@@ -337,17 +345,17 @@ class TestCohortRetencao:
         p0 = df_retencao[df_retencao["periodo"] == 0]
         assert len(p0) > 0, "Nenhum período 0 encontrado"
         for _, row in p0.iterrows():
-            assert float(row["taxa_retencao"]) == 1.0, (
-                f"Coorte {row['coorte_mes']}: taxa periodo 0 = {row['taxa_retencao']}"
-            )
+            assert (
+                float(row["taxa_retencao"]) == 1.0
+            ), f"Coorte {row['coorte_mes']}: taxa periodo 0 = {row['taxa_retencao']}"
 
     def test_retention_between_zero_and_one(self, df_retencao: pd.DataFrame) -> None:
         """Todas as taxas de retenção estão entre 0.0 e 1.0."""
         for _, row in df_retencao.iterrows():
             rate = float(row["taxa_retencao"])
-            assert 0.0 <= rate <= 1.0, (
-                f"Taxa fora do range: {rate} em coorte {row['coorte_mes']} p{row['periodo']}"
-            )
+            assert (
+                0.0 <= rate <= 1.0
+            ), f"Taxa fora do range: {rate} em coorte {row['coorte_mes']} p{row['periodo']}"
 
     def test_periods_are_non_negative(self, df_retencao: pd.DataFrame) -> None:
         """Todos os períodos são >= 0."""
@@ -395,8 +403,11 @@ class TestCohortRecompra:
     def test_columns(self, df_recompra: pd.DataFrame) -> None:
         """T025: DataFrame de recompra tem colunas corretas."""
         expected = [
-            "total_clientes", "clientes_recompra", "taxa_recompra_pct",
-            "media_pedidos_por_cliente", "dias_medio_ate_recompra",
+            "total_clientes",
+            "clientes_recompra",
+            "taxa_recompra_pct",
+            "media_pedidos_por_cliente",
+            "dias_medio_ate_recompra",
         ]
         assert list(df_recompra.columns) == expected
 
@@ -431,17 +442,39 @@ class TestCohortRecompra:
 # =========================================================
 
 VALID_UFS = {
-    "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS",
-    "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC",
-    "SE", "SP", "TO",
+    "AC",
+    "AL",
+    "AM",
+    "AP",
+    "BA",
+    "CE",
+    "DF",
+    "ES",
+    "GO",
+    "MA",
+    "MG",
+    "MS",
+    "MT",
+    "PA",
+    "PB",
+    "PE",
+    "PI",
+    "PR",
+    "RJ",
+    "RN",
+    "RO",
+    "RR",
+    "RS",
+    "SC",
+    "SE",
+    "SP",
+    "TO",
 }
 
 
 # T014 — Query Geo executa e retorna resultados corretos
 class TestGeoQuery:
-    def test_geo_has_two_results(
-        self, sample_db: duckdb.DuckDBPyConnection
-    ) -> None:
+    def test_geo_has_two_results(self, sample_db: duckdb.DuckDBPyConnection) -> None:
         """T014: Geo gera 2 resultados: geo_estados e geo_categorias."""
         results = run_query("04_geo.sql", con=sample_db)
         assert set(results.keys()) == {"geo_estados", "geo_categorias"}
@@ -456,8 +489,13 @@ class TestGeoEstados:
     def test_columns(self, df_estados: pd.DataFrame) -> None:
         """T019: DataFrame de estados tem colunas corretas."""
         expected = [
-            "estado", "pedidos", "receita", "ticket_medio",
-            "frete_medio", "frete_percentual", "review_score_medio",
+            "estado",
+            "pedidos",
+            "receita",
+            "ticket_medio",
+            "frete_medio",
+            "frete_percentual",
+            "review_score_medio",
             "total_vendedores",
         ]
         assert list(df_estados.columns) == expected
@@ -465,9 +503,7 @@ class TestGeoEstados:
     def test_states_are_valid_ufs(self, df_estados: pd.DataFrame) -> None:
         """Todos os estados são UFs brasileiras válidas."""
         states = set(df_estados["estado"])
-        assert states.issubset(VALID_UFS), (
-            f"UFs invalidas: {states - VALID_UFS}"
-        )
+        assert states.issubset(VALID_UFS), f"UFs invalidas: {states - VALID_UFS}"
 
     def test_at_most_27_rows(self, df_estados: pd.DataFrame) -> None:
         """No máximo 27 linhas (uma por UF)."""
@@ -564,9 +600,7 @@ class TestGeoCategorias:
 
 # T015 — Query Sazonalidade executa e retorna resultados corretos
 class TestSazonalidadeQuery:
-    def test_has_three_results(
-        self, sample_db: duckdb.DuckDBPyConnection
-    ) -> None:
+    def test_has_three_results(self, sample_db: duckdb.DuckDBPyConnection) -> None:
         """T015: Sazonalidade gera 3 resultados nomeados."""
         results = run_query("05_sazonalidade.sql", con=sample_db)
         assert set(results.keys()) == {
@@ -599,9 +633,7 @@ class TestSazonalidadeMensal:
         """Receita é positiva em todos os meses."""
         assert (df_mensal["receita"] > 0).all()
 
-    def test_media_movel_null_first_two_months(
-        self, df_mensal: pd.DataFrame
-    ) -> None:
+    def test_media_movel_null_first_two_months(self, df_mensal: pd.DataFrame) -> None:
         """Média móvel é NULL/NaN nos 2 primeiros meses."""
         assert pd.isna(df_mensal.iloc[0]["media_movel_3m"])
         assert pd.isna(df_mensal.iloc[1]["media_movel_3m"])
@@ -613,9 +645,7 @@ class TestSazonalidadeMensal:
         if len(df_mensal) >= 3:
             assert pd.notna(df_mensal.iloc[2]["media_movel_3m"])
 
-    def test_media_movel_positive_when_present(
-        self, df_mensal: pd.DataFrame
-    ) -> None:
+    def test_media_movel_positive_when_present(self, df_mensal: pd.DataFrame) -> None:
         """Média móvel é positiva quando presente."""
         valid = df_mensal["media_movel_3m"].dropna()
         assert (valid > 0).all()
@@ -624,9 +654,7 @@ class TestSazonalidadeMensal:
         """MoM growth é NULL no primeiro mês."""
         assert pd.isna(df_mensal.iloc[0]["mom_growth"])
 
-    def test_mom_growth_not_null_from_second(
-        self, df_mensal: pd.DataFrame
-    ) -> None:
+    def test_mom_growth_not_null_from_second(self, df_mensal: pd.DataFrame) -> None:
         """MoM growth é preenchido a partir do 2o mês."""
         if len(df_mensal) >= 2:
             assert pd.notna(df_mensal.iloc[1]["mom_growth"])
@@ -705,9 +733,7 @@ class TestSazonalidadeHoraria:
 
 # T016 — Query Reviews executa e retorna resultados corretos
 class TestReviewsQuery:
-    def test_has_five_results(
-        self, sample_db: duckdb.DuckDBPyConnection
-    ) -> None:
+    def test_has_five_results(self, sample_db: duckdb.DuckDBPyConnection) -> None:
         """T016: Reviews gera 5 resultados nomeados."""
         results = run_query("06_reviews.sql", con=sample_db)
         assert set(results.keys()) == {
@@ -742,9 +768,7 @@ class TestReviewsDistribuicao:
         self, df_dist: pd.DataFrame, sample_db: duckdb.DuckDBPyConnection
     ) -> None:
         """Soma das contagens = total de reviews."""
-        total = sample_db.execute(
-            "SELECT COUNT(*) FROM order_reviews"
-        ).fetchone()[0]
+        total = sample_db.execute("SELECT COUNT(*) FROM order_reviews").fetchone()[0]
         assert df_dist["contagem"].sum() == total
 
 
@@ -756,8 +780,13 @@ class TestReviewsNps:
     def test_columns(self, df_nps: pd.DataFrame) -> None:
         """DataFrame NPS tem colunas corretas."""
         expected = [
-            "promotores", "neutros", "detratores", "total",
-            "pct_promotores", "pct_detratores", "nps",
+            "promotores",
+            "neutros",
+            "detratores",
+            "total",
+            "pct_promotores",
+            "pct_detratores",
+            "nps",
         ]
         assert list(df_nps.columns) == expected
 
@@ -790,8 +819,11 @@ class TestReviewsCategorias:
     def test_columns(self, df_cat: pd.DataFrame) -> None:
         """DataFrame categorias tem colunas corretas."""
         expected = [
-            "categoria", "total_reviews", "score_medio",
-            "reviews_positivas", "reviews_negativas",
+            "categoria",
+            "total_reviews",
+            "score_medio",
+            "reviews_positivas",
+            "reviews_negativas",
         ]
         assert list(df_cat.columns) == expected
 

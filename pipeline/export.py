@@ -31,6 +31,7 @@ logger = logging.getLogger(__name__)
 # Helpers de serialização
 # --------------------------------------------------------------------------- #
 
+
 def _clean_value(v: Any) -> Any:
     """Converte valor individual pra JSON-safe.
 
@@ -65,10 +66,7 @@ def _clean_value(v: Any) -> Any:
 def _df_to_records(df: pd.DataFrame) -> list[dict]:
     """Converte DataFrame em lista de dicts JSON-safe."""
     records = df.to_dict(orient="records")
-    return [
-        {k: _clean_value(v) for k, v in row.items()}
-        for row in records
-    ]
+    return [{k: _clean_value(v) for k, v in row.items()} for row in records]
 
 
 def _round_monetary(v: Any) -> Any:
@@ -113,6 +111,7 @@ def _save_json(data: Any, path: Path) -> None:
 # --------------------------------------------------------------------------- #
 # Exportadores por capítulo
 # --------------------------------------------------------------------------- #
+
 
 def _export_cap1_funil(resultados: dict, output_dir: Path) -> list[str]:
     """Cap.1: Funil de Vendas — 3 JSONs."""
@@ -188,8 +187,7 @@ def _export_cap2_rfm(resultados: dict, output_dir: Path) -> list[str]:
             if isinstance(centroids, np.ndarray):
                 centroids = centroids.tolist()
             clustering_data["centroids"] = [
-                [round(float(v), 4) for v in row]
-                for row in centroids
+                [round(float(v), 4) for v in row] for row in centroids
             ]
         _save_json(clustering_data, output_dir / "02_rfm_clustering.json")
         paths.append("02_rfm_clustering.json")
@@ -216,22 +214,30 @@ def _export_cap3_cohort(resultados: dict, output_dir: Path) -> list[str]:
         for coorte in coortes:
             df_c = df[df["coorte_mes"] == coorte]
             tamanho_row = df_c[df_c["periodo"] == 0]
-            tamanho = int(tamanho_row["tamanho_coorte"].iloc[0]) if len(tamanho_row) > 0 else 0
+            tamanho = (
+                int(tamanho_row["tamanho_coorte"].iloc[0])
+                if len(tamanho_row) > 0
+                else 0
+            )
 
             retencao = []
             for p in periodos:
                 row = df_c[df_c["periodo"] == p]
                 if len(row) > 0:
                     taxa = row["taxa_retencao"].iloc[0]
-                    retencao.append(_clean_value(round(float(taxa), 4)) if pd.notna(taxa) else None)
+                    retencao.append(
+                        _clean_value(round(float(taxa), 4)) if pd.notna(taxa) else None
+                    )
                 else:
                     retencao.append(None)
 
-            dados.append({
-                "coorte": coorte,
-                "tamanho": tamanho,
-                "retencao": retencao,
-            })
+            dados.append(
+                {
+                    "coorte": coorte,
+                    "tamanho": tamanho,
+                    "retencao": retencao,
+                }
+            )
 
         heatmap = {
             "coortes": coortes,
@@ -304,9 +310,7 @@ def _export_cap5_sazonalidade(resultados: dict, output_dir: Path) -> list[str]:
     # 05_sazonalidade_semanal.json
     if "sazonalidade_semanal" in resultados:
         records = _df_to_records(resultados["sazonalidade_semanal"])
-        records = _round_fields(
-            records, monetary=["receita_media", "ticket_medio"]
-        )
+        records = _round_fields(records, monetary=["receita_media", "ticket_medio"])
         _save_json(records, output_dir / "05_sazonalidade_semanal.json")
         paths.append("05_sazonalidade_semanal.json")
 
@@ -358,6 +362,7 @@ def _export_cap6_reviews(resultados: dict, output_dir: Path) -> list[str]:
 # --------------------------------------------------------------------------- #
 # Função principal
 # --------------------------------------------------------------------------- #
+
 
 def export_all(
     resultados: dict,

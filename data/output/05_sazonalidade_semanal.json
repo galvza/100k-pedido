@@ -1,0 +1,9 @@
+[
+  {"dia_semana":1,"pedidos_medio":428.5,"receita_media":58705,"ticket_medio":137.0},
+  {"dia_semana":2,"pedidos_medio":427.2,"receita_media":58527,"ticket_medio":137.0},
+  {"dia_semana":3,"pedidos_medio":401.8,"receita_media":55047,"ticket_medio":137.0},
+  {"dia_semana":4,"pedidos_medio":390.3,"receita_media":53471,"ticket_medio":137.0},
+  {"dia_semana":5,"pedidos_medio":352.7,"receita_media":48320,"ticket_medio":137.0},
+  {"dia_semana":6,"pedidos_medio":232.4,"receita_media":31839,"ticket_medio":137.0},
+  {"dia_semana":7,"pedidos_medio":227.9,"receita_media":34222,"ticket_medio":150.2}
+]

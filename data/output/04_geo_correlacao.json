@@ -1,0 +1,7 @@
+{
+  "teste_usado": "Spearman",
+  "p_value": 0.0021,
+  "significativo": true,
+  "tamanho_efeito": -0.681,
+  "mensagem": "Estados com maior proporção de frete no valor do pedido tendem a ter score médio menor. A correlação é moderada e significativa (α=0,05)."
+}

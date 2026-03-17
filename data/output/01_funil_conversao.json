@@ -1,0 +1,6 @@
+[
+  { "etapa": "Compra",    "pedidos": 99441, "taxa_conversao": 1.0,   "tempo_medio_dias": 0.0   },
+  { "etapa": "Aprovação", "pedidos": 97671, "taxa_conversao": 0.982, "tempo_medio_dias": 0.41  },
+  { "etapa": "Envio",     "pedidos": 96585, "taxa_conversao": 0.989, "tempo_medio_dias": 2.53  },
+  { "etapa": "Entrega",   "pedidos": 96478, "taxa_conversao": 0.999, "tempo_medio_dias": 12.09 }
+]
