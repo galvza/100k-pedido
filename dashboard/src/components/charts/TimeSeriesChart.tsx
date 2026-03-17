@@ -9,6 +9,7 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  ReferenceLine,
   ResponsiveContainer,
 } from "recharts";
 import { loadChapterData } from "@/lib/data";
@@ -91,6 +92,17 @@ export default function TimeSeriesChart() {
             width={64}
           />
           <Tooltip content={<CustomTooltip />} />
+          <ReferenceLine
+            x="2017-11"
+            stroke="#ef4444"
+            strokeDasharray="4 4"
+            label={{
+              value: "Black Friday '17",
+              position: "top",
+              fill: "#ef4444",
+              fontSize: 12,
+            }}
+          />
           <Legend
             wrapperStyle={{ fontSize: 11, paddingTop: 8 }}
             iconType="line"

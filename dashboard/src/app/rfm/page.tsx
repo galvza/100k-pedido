@@ -133,6 +133,19 @@ export default function RfmPage() {
           lógica de segmentação escolhida.
         </Callout>
       </section>
+      {/* Links pro código Python */}
+      <div className="mt-6 pt-4 border-t border-border">
+        <p className="font-sans text-xs text-muted">
+          Ver código-fonte:{" "}
+          <a href="https://github.com/galvza/100k-pedidos/blob/main/pipeline/analyze/clustering.py" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+            pipeline/analyze/clustering.py
+          </a>
+          {" · "}
+          <a href="https://github.com/galvza/100k-pedidos/blob/main/pipeline/analyze/descritiva.py" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+            pipeline/analyze/descritiva.py
+          </a>
+        </p>
+      </div>
     </ChapterLayout>
   );
 }

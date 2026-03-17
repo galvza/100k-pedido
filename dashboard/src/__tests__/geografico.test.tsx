@@ -29,12 +29,13 @@ vi.mock("recharts", () => ({
   ScatterChart: ({ children }: { children: React.ReactNode }) => (
     <div data-testid="scatter-chart">{children}</div>
   ),
-  Scatter: () => null,
+  Scatter: ({ children }: { children?: React.ReactNode }) => <>{children}</>,
   XAxis: () => null,
   YAxis: () => null,
   CartesianGrid: () => null,
   Tooltip: () => null,
   Label: () => null,
+  LabelList: () => null,
   ReferenceLine: () => null,
 }));
 
@@ -165,16 +166,16 @@ describe("T079 — StateRanking", () => {
     );
   });
 
-  it("T079i: exibe botões de ordenação", async () => {
+  it("T079i: exibe headers de ordenação clicáveis", async () => {
     mockLoad.mockResolvedValue(estadosFixture);
     render(<StateRanking />);
     await waitFor(() => {
-      const buttons = screen.getAllByRole("button");
-      const labels = buttons.map((b) => b.textContent);
+      const headers = screen.getAllByRole("columnheader");
+      const labels = headers.map((h) => h.textContent?.replace(/ [↓↑]/, ""));
       expect(labels).toContain("Pedidos");
       expect(labels).toContain("Receita");
       expect(labels).toContain("Frete Médio");
-      expect(labels).toContain("Satisfação");
+      expect(labels).toContain("Score");
     });
   });
 });

@@ -94,6 +94,15 @@ export default function SazonalidadePage() {
           de 1–2 horas.
         </Callout>
       </section>
+      {/* Links pro código Python */}
+      <div className="mt-6 pt-4 border-t border-border">
+        <p className="font-sans text-xs text-muted">
+          Ver código-fonte:{" "}
+          <a href="https://github.com/galvza/100k-pedidos/blob/main/notebooks/02_analise_estatistica.ipynb" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+            notebooks/02_analise_estatistica.ipynb
+          </a>
+        </p>
+      </div>
     </ChapterLayout>
   );
 }

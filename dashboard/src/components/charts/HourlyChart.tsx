@@ -8,6 +8,7 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
+  ReferenceLine,
   ResponsiveContainer,
 } from "recharts";
 import { loadChapterData } from "@/lib/data";
@@ -55,6 +56,11 @@ export default function HourlyChart() {
     );
   }
 
+  const avg = data.reduce((s, d) => s + d.pedidos, 0) / data.length;
+  // Find the two peak hours (10h and 20h typical)
+  const sorted = [...data].sort((a, b) => b.pedidos - a.pedidos);
+  const peakHours = sorted.slice(0, 2).map((d) => d.hora);
+
   return (
     <div data-testid="hourly-chart" className="mt-4">
       <ResponsiveContainer width="100%" height={208}>
@@ -72,12 +78,32 @@ export default function HourlyChart() {
             width={50}
           />
           <Tooltip content={<CustomTooltip />} />
+          <ReferenceLine
+            y={avg}
+            stroke={MUTED_COLOR}
+            strokeDasharray="4 4"
+            label={{ value: "Média", position: "right", fill: MUTED_COLOR, fontSize: 10 }}
+          />
+          {peakHours.map((h) => (
+            <ReferenceLine
+              key={h}
+              x={h}
+              stroke="#1d4ed8"
+              strokeDasharray="3 3"
+              label={{
+                value: `${String(h).padStart(2, "0")}h`,
+                position: "top",
+                fill: "#1d4ed8",
+                fontSize: 10,
+              }}
+            />
+          ))}
           <Area
             type="monotone"
             dataKey="pedidos"
             stroke={CHART_COLORS[0]}
             fill={CHART_COLORS[0]}
-            fillOpacity={0.12}
+            fillOpacity={0.22}
             strokeWidth={CHART_CONFIG.strokeWidth}
             dot={false}
           />

@@ -4,10 +4,12 @@ import { useEffect, useState } from "react";
 import {
   BarChart,
   Bar,
+  Cell,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
+  ReferenceLine,
   ResponsiveContainer,
 } from "recharts";
 import { loadChapterData } from "@/lib/data";
@@ -67,6 +69,8 @@ export default function WeekdayChart() {
   }
 
   const enriched = data.map((d) => ({ ...d, label: LABELS[d.dia_semana] }));
+  const maxVal = Math.max(...enriched.map((d) => d.pedidos_medio));
+  const avg = enriched.reduce((s, d) => s + d.pedidos_medio, 0) / enriched.length;
 
   return (
     <div data-testid="weekday-chart" className="mt-4">
@@ -83,11 +87,23 @@ export default function WeekdayChart() {
             width={50}
           />
           <Tooltip content={<CustomTooltip />} />
+          <ReferenceLine
+            y={avg}
+            stroke={MUTED_COLOR}
+            strokeDasharray="4 4"
+            label={{ value: "Média", position: "right", fill: MUTED_COLOR, fontSize: 10 }}
+          />
           <Bar
             dataKey="pedidos_medio"
-            fill={CHART_COLORS[0]}
             radius={[CHART_CONFIG.barRadius, CHART_CONFIG.barRadius, 0, 0]}
-          />
+          >
+            {enriched.map((entry, i) => (
+              <Cell
+                key={i}
+                fill={entry.pedidos_medio === maxVal ? "#1d4ed8" : CHART_COLORS[0]}
+              />
+            ))}
+          </Bar>
         </BarChart>
       </ResponsiveContainer>
     </div>

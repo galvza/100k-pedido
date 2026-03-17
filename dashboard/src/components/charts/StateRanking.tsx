@@ -7,12 +7,8 @@ import { formatNumber, formatBRL, formatBRLCompact, formatPercent } from "@/lib/
 
 type SortKey = "pedidos" | "receita" | "frete_medio" | "review_score_medio";
 
-const SORT_LABELS: Record<SortKey, string> = {
-  pedidos: "Pedidos",
-  receita: "Receita",
-  frete_medio: "Frete Médio",
-  review_score_medio: "Satisfação",
-};
+type SortDir = "asc" | "desc";
+
 
 /**
  * Tabela de ranking dos estados ordenável por pedidos, receita, frete ou score.
@@ -20,6 +16,7 @@ const SORT_LABELS: Record<SortKey, string> = {
 export default function StateRanking() {
   const [data, setData] = useState<GeoEstado[] | null>(null);
   const [sortKey, setSortKey] = useState<SortKey>("pedidos");
+  const [sortDir, setSortDir] = useState<SortDir>("desc");
 
   useEffect(() => {
     loadChapterData<GeoEstado[]>("04_geo_estados.json").then(setData);
@@ -34,37 +31,48 @@ export default function StateRanking() {
     );
   }
 
-  const sorted = [...data].sort((a, b) => b[sortKey] - a[sortKey]);
+  const handleSort = (key: SortKey) => {
+    if (sortKey === key) {
+      setSortDir((d) => (d === "desc" ? "asc" : "desc"));
+    } else {
+      setSortKey(key);
+      setSortDir("desc");
+    }
+  };
+
+  const sorted = [...data].sort((a, b) =>
+    sortDir === "desc" ? b[sortKey] - a[sortKey] : a[sortKey] - b[sortKey]
+  );
+
+  const sortIndicator = (key: SortKey) =>
+    sortKey === key ? (sortDir === "desc" ? " ↓" : " ↑") : "";
+
+  const thClass = (key: SortKey | null, align: "left" | "right" = "right") =>
+    `${align === "left" ? "text-left" : "text-right"} py-2 px-3 font-semibold ${
+      key ? "cursor-pointer select-none hover:text-foreground" : ""
+    } ${sortKey === key ? "text-primary" : "text-muted"}`;
 
   return (
     <div data-testid="state-ranking" className="mt-4">
-      <div className="flex gap-2 mb-3 flex-wrap">
-        {(Object.keys(SORT_LABELS) as SortKey[]).map((k) => (
-          <button
-            key={k}
-            onClick={() => setSortKey(k)}
-            className={`text-xs px-3 py-1.5 rounded border font-sans transition-colors ${
-              sortKey === k
-                ? "bg-primary text-white border-primary"
-                : "bg-white text-muted border-border hover:border-primary"
-            }`}
-          >
-            {SORT_LABELS[k]}
-          </button>
-        ))}
-      </div>
-
       <div className="overflow-x-auto">
         <table className="w-full text-xs font-sans border-collapse">
           <thead>
             <tr className="border-b border-border">
-              <th className="text-left py-2 px-3 text-muted font-semibold">#</th>
-              <th className="text-left py-2 px-3 text-muted font-semibold">UF</th>
-              <th className="text-right py-2 px-3 text-muted font-semibold">Pedidos</th>
-              <th className="text-right py-2 px-3 text-muted font-semibold">Receita</th>
-              <th className="text-right py-2 px-3 text-muted font-semibold">Frete Médio</th>
+              <th className={thClass(null, "left")}>#</th>
+              <th className={thClass(null, "left")}>UF</th>
+              <th className={thClass("pedidos")} onClick={() => handleSort("pedidos")}>
+                Pedidos{sortIndicator("pedidos")}
+              </th>
+              <th className={thClass("receita")} onClick={() => handleSort("receita")}>
+                Receita{sortIndicator("receita")}
+              </th>
+              <th className={thClass("frete_medio")} onClick={() => handleSort("frete_medio")}>
+                Frete Médio{sortIndicator("frete_medio")}
+              </th>
               <th className="text-right py-2 px-3 text-muted font-semibold">Frete %</th>
-              <th className="text-right py-2 px-3 text-muted font-semibold">Score</th>
+              <th className={thClass("review_score_medio")} onClick={() => handleSort("review_score_medio")}>
+                Score{sortIndicator("review_score_medio")}
+              </th>
             </tr>
           </thead>
           <tbody>

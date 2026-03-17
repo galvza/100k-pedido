@@ -16,7 +16,7 @@ WITH classificacao AS (
   SELECT
     CASE
       WHEN review_score = 5 THEN 'promotor'
-      WHEN review_score = 4 THEN 'neutro'
+      WHEN review_score >= 3 THEN 'neutro'
       ELSE 'detrator'
     END AS tipo
   FROM order_reviews
@@ -71,12 +71,12 @@ WITH entregas AS (
 )
 SELECT
   CASE
-    WHEN dias_atraso < -7 THEN 'Muito antes (-7+ dias)'
-    WHEN dias_atraso BETWEEN -7 AND -1 THEN 'Antes do prazo (-1 a -7 dias)'
-    WHEN dias_atraso = 0 THEN 'No prazo'
-    WHEN dias_atraso BETWEEN 1 AND 7 THEN 'Atraso leve (1-7 dias)'
-    WHEN dias_atraso BETWEEN 8 AND 14 THEN 'Atraso medio (8-14 dias)'
-    ELSE 'Atraso grave (15+ dias)'
+    WHEN dias_atraso <= 0 THEN 'No prazo ou antes'
+    WHEN dias_atraso BETWEEN 1 AND 3 THEN '1-3 dias'
+    WHEN dias_atraso BETWEEN 4 AND 7 THEN '4-7 dias'
+    WHEN dias_atraso BETWEEN 8 AND 14 THEN '8-14 dias'
+    WHEN dias_atraso BETWEEN 15 AND 30 THEN '15-30 dias'
+    ELSE 'Mais de 30 dias'
   END AS faixa_atraso,
   COUNT(*) AS contagem,
   ROUND(AVG(review_score), 2) AS score_medio,
@@ -85,12 +85,12 @@ SELECT
 FROM entregas
 GROUP BY
   CASE
-    WHEN dias_atraso < -7 THEN 'Muito antes (-7+ dias)'
-    WHEN dias_atraso BETWEEN -7 AND -1 THEN 'Antes do prazo (-1 a -7 dias)'
-    WHEN dias_atraso = 0 THEN 'No prazo'
-    WHEN dias_atraso BETWEEN 1 AND 7 THEN 'Atraso leve (1-7 dias)'
-    WHEN dias_atraso BETWEEN 8 AND 14 THEN 'Atraso medio (8-14 dias)'
-    ELSE 'Atraso grave (15+ dias)'
+    WHEN dias_atraso <= 0 THEN 'No prazo ou antes'
+    WHEN dias_atraso BETWEEN 1 AND 3 THEN '1-3 dias'
+    WHEN dias_atraso BETWEEN 4 AND 7 THEN '4-7 dias'
+    WHEN dias_atraso BETWEEN 8 AND 14 THEN '8-14 dias'
+    WHEN dias_atraso BETWEEN 15 AND 30 THEN '15-30 dias'
+    ELSE 'Mais de 30 dias'
   END
 ORDER BY min_dias;
 

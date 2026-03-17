@@ -6,10 +6,13 @@ import ScoreDistribution from "@/components/charts/ScoreDistribution";
 import NpsGauge from "@/components/charts/NpsGauge";
 import CategoryScores from "@/components/charts/CategoryScores";
 import DelayImpact from "@/components/charts/DelayImpact";
+import WordList from "@/components/charts/WordList";
 
 export const metadata: Metadata = {
   title: "Reviews e Satisfação",
 };
+
+const GITHUB_BASE = "https://github.com/galvza/100k-pedidos/blob/main";
 
 export default function ReviewsPage() {
   return (
@@ -121,71 +124,20 @@ export default function ReviewsPage() {
           <WordList faixa="negativa" label="Avaliações 1★" color="text-red-700" />
         </div>
       </section>
+
+      {/* Links pro código Python */}
+      <div className="mt-6 pt-4 border-t border-border">
+        <p className="font-sans text-xs text-muted">
+          Ver código-fonte:{" "}
+          <a href={`${GITHUB_BASE}/pipeline/analyze/predicao.py`} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+            pipeline/analyze/predicao.py
+          </a>
+          {" · "}
+          <a href={`${GITHUB_BASE}/pipeline/analyze/hipoteses.py`} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+            pipeline/analyze/hipoteses.py
+          </a>
+        </p>
+      </div>
     </ChapterLayout>
-  );
-}
-
-// ------------------------------------------------------------------ //
-// Componente inline: lista de palavras frequentes
-// ------------------------------------------------------------------ //
-
-interface WordListProps {
-  faixa: "positiva" | "negativa";
-  label: string;
-  color: string;
-}
-
-const WORDS: Record<"positiva" | "negativa", Array<{ palavra: string; contagem: number }>> = {
-  positiva: [
-    { palavra: "recomendo", contagem: 8943 },
-    { palavra: "ótimo", contagem: 7821 },
-    { palavra: "chegou", contagem: 7234 },
-    { palavra: "prazo", contagem: 6892 },
-    { palavra: "rápido", contagem: 6123 },
-    { palavra: "produto", contagem: 5678 },
-    { palavra: "bom", contagem: 5234 },
-    { palavra: "perfeito", contagem: 4567 },
-    { palavra: "excelente", contagem: 4321 },
-    { palavra: "parabéns", contagem: 3987 },
-  ],
-  negativa: [
-    { palavra: "não", contagem: 4321 },
-    { palavra: "prazo", contagem: 3891 },
-    { palavra: "chegou", contagem: 3456 },
-    { palavra: "produto", contagem: 2987 },
-    { palavra: "péssimo", contagem: 2345 },
-    { palavra: "errado", contagem: 1987 },
-    { palavra: "problema", contagem: 1876 },
-    { palavra: "demora", contagem: 1654 },
-    { palavra: "nunca", contagem: 1432 },
-    { palavra: "cancelar", contagem: 1234 },
-  ],
-};
-
-function WordList({ faixa, label, color }: WordListProps) {
-  const words = WORDS[faixa];
-  const max = words[0].contagem;
-  return (
-    <div>
-      <p className={`font-sans text-xs font-semibold uppercase tracking-wide mb-3 ${color}`}>
-        {label}
-      </p>
-      <ul className="space-y-1.5">
-        {words.map(({ palavra, contagem }) => (
-          <li key={palavra} className="flex items-center gap-2">
-            <span className="font-sans text-xs text-foreground w-24 shrink-0">{palavra}</span>
-            <div className="flex-1 bg-secondary rounded-full h-2 overflow-hidden">
-              <div
-                className={`h-full rounded-full ${faixa === "positiva" ? "bg-emerald-500" : "bg-red-400"}`}
-                style={{ width: `${(contagem / max) * 100}%` }}
-              />
-            </div>
-            <span className="font-sans text-xs text-muted tabular-nums w-14 text-right shrink-0">
-              {contagem.toLocaleString("pt-BR")}
-            </span>
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 }

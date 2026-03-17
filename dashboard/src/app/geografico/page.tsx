@@ -81,6 +81,15 @@ export default function GeograficoPage() {
           O frete pode ser um proxy da distância, que é o verdadeiro driver.
         </Callout>
       </section>
+      {/* Links pro código Python */}
+      <div className="mt-6 pt-4 border-t border-border">
+        <p className="font-sans text-xs text-muted">
+          Ver código-fonte:{" "}
+          <a href="https://github.com/galvza/100k-pedidos/blob/main/pipeline/analyze/hipoteses.py" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+            pipeline/analyze/hipoteses.py
+          </a>
+        </p>
+      </div>
     </ChapterLayout>
   );
 }

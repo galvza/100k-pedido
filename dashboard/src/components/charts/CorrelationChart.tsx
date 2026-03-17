@@ -12,6 +12,7 @@ import {
   Tooltip,
   ResponsiveContainer,
   Label,
+  LabelList,
 } from "recharts";
 import { CHART_CONFIG, CHART_COLORS, MUTED_COLOR } from "@/lib/constants";
 
@@ -19,6 +20,7 @@ interface ScatterPoint {
   x: number;
   y: number;
   estado: string;
+  showLabel?: boolean;
 }
 
 interface TooltipPayloadItem {
@@ -38,12 +40,21 @@ export default function CorrelationChart() {
       loadChapterData<GeoEstado[]>("04_geo_estados.json"),
       loadChapterData<GeoCorrelacao>("04_geo_correlacao.json"),
     ]).then(([estados, corr]) => {
+      const pts = estados.map((d) => ({
+        x: Math.round(d.frete_percentual * 1000) / 10,
+        y: d.review_score_medio,
+        estado: d.estado,
+      }));
+      // Marcar os 5 outliers mais extremos (top/bottom em x e y)
+      const sortedByX = [...pts].sort((a, b) => b.x - a.x);
+      const sortedByY = [...pts].sort((a, b) => a.y - b.y);
+      const outlierStates = new Set([
+        ...sortedByX.slice(0, 3).map((p) => p.estado),
+        ...sortedByY.slice(0, 2).map((p) => p.estado),
+        sortedByX[sortedByX.length - 1].estado,
+      ]);
       setPoints(
-        estados.map((d) => ({
-          x: Math.round(d.frete_percentual * 1000) / 10,
-          y: d.review_score_medio,
-          estado: d.estado,
-        }))
+        pts.map((p) => ({ ...p, showLabel: outlierStates.has(p.estado) }))
       );
       setCorrelacao(corr);
     });
@@ -106,7 +117,27 @@ export default function CorrelationChart() {
               );
             }}
           />
-          <Scatter data={points} fill={CHART_COLORS[0]} opacity={0.75} />
+          <Scatter data={points} fill={CHART_COLORS[0]} opacity={0.75}>
+            <LabelList
+              dataKey="estado"
+              position="top"
+              style={{ fontSize: 10, fill: MUTED_COLOR, fontFamily: "sans-serif" }}
+              content={(props) => {
+                const { x, y, value, index } = props as { x?: string | number; y?: string | number; value?: string | number; index?: number };
+                if (index == null || !points[index]?.showLabel) return null;
+                return (
+                  <text
+                    x={Number(x)}
+                    y={Number(y ?? 0) - 6}
+                    textAnchor="middle"
+                    style={{ fontSize: 10, fill: MUTED_COLOR, fontFamily: "sans-serif" }}
+                  >
+                    {value}
+                  </text>
+                );
+              }}
+            />
+          </Scatter>
         </ScatterChart>
       </ResponsiveContainer>
 
