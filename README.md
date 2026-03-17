@@ -153,7 +153,7 @@ npm run dev   # http://localhost:3000
 
 ## Créditos
 
-por Gabriel — [LinkedIn](https://linkedin.com) · [GitHub](https://github.com/galvza)
+por Gabriel — [LinkedIn](https://www.linkedin.com/in/biel-als/) · [GitHub](https://github.com/galvza)
 
 Dataset: [Olist Brazilian E-Commerce Public Dataset](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) — licença CC BY-NC-SA 4.0.
 
